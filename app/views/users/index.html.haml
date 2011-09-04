@@ -1,0 +1,13 @@
+.section
+  %h1 This is Heading 1
+  %p And this would be just plain lorem ipsum paragraph text.
+  %h2 This is Heading 2
+  %p And this would be just plain lorem ipsum paragraph text.
+  %h3 This is Heading 3
+  %p And this would be just plain lorem ipsum paragraph text.
+    
+- [1, 2, 4, 8, 16].each do |i|
+  .row
+    - (16/i).times do
+      .columns.highlight{:class => "span#{i}", :style => 'text-align:center'}
+        = i 

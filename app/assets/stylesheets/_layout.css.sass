@@ -1,0 +1,34 @@
+$columns_count: 16
+$content_width: (3 * $columns_count + 1) * $grid
+body
+  background: #ddd
+    
+#body_wrapper
+  margin: 0 auto
+  width: $content_width
+  background: #fff
+  overflow: hidden
+  padding: $grid 0 0 0
+  
+.section
+  padding: 0 $grid
+  
+.row, .section
+  float: left
+  clear: both
+  margin-bottom: $grid
+  
+.columns
+  float: left	
+  margin-left: $grid
+  @for $colspan from 1 through $columns_count
+    &.span#{$colspan}
+      width: 2 * $colspan * $grid + ($colspan - 1) * $grid
+      
+  // Offset classes
+  @for $offset from 1 through ($columns_count - 1)
+    &.offset#{$offset}
+      margin-left: 3 * $offset * $grid
+  &.highlight
+    text-align: center
+    background: #bbb

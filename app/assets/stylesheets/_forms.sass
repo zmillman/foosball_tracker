@@ -1,0 +1,34 @@
+form  
+  .field
+    @include clearfix
+    padding: $grid / 2
+    label
+      float: left
+      text-align: right
+      min-width: $grid * 5
+      padding-right: $grid
+    input
+      margin-left: 6 * $grid
+      float: left
+    label+input
+      margin-left: 0
+  &.stacked
+    label
+      text-align: left
+      clear: both
+    input
+      margin-left: 0
+      clear: both
+    
+
+input[type="text"], input[type="password"]
+  padding: $grid/4
+  border: 1px solid #ccc
+    
+input[type="submit"]
+  background: #ff6c00
+  color: #fff
+  border: 1px solid
+  height: $grid * 2
+  padding: $grid/2 $grid
+  @include rounded

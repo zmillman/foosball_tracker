@@ -1,0 +1,29 @@
+// Reset
+*
+  margin: 0
+  padding: 0
+
+/* Global variables */
+$grid: 17px
+
+/* Mixins */
+@mixin clearfix
+  overflow: hidden
+
+@mixin rounded($side: all, $radius: 4px)
+  @if ($side == all)
+    border-radius: $radius
+    -moz-border-radius: $radius
+    -webkit-border-radius: $radius
+  @else
+    border-#{$side}-radius: $radius
+    -moz-border-radius-#{$side}: $radius
+    -webkit-border-#{$side}-radius: $radius
+
+/* Sass partial includes */
+
+@import layout
+
+@import typo
+	
+@import forms 
