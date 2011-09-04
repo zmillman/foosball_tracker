@@ -7,7 +7,7 @@ FoosballLeague::Application.routes.draw do
   
   get "sign_up" => "users#new", :as => "sign_up"
   
-  resources :users
+  resources :users, :actions => [:new, :create, :show]
   
   root :to => "sessions#new"
   

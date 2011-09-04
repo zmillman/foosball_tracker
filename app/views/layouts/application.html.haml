@@ -11,4 +11,10 @@
     
   %body
     #body_wrapper
+      - unless flash[:notice].blank?
+        .alert.block
+          %p= flash[:notice]
+      - unless flash[:alert].blank?
+        .alert.block
+          %p= flash[:alert]
       = yield

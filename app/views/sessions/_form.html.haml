@@ -1,12 +1,12 @@
-= form_for resource, :html => {:class => 'stacked'} do |f|
+= form_tag sessions_path, :class => 'stacked' do
   .field
-    = f.label :email
-    = f.text_field :email
+    = label_tag :email
+    = text_field_tag :email, params[:email]
     
   .field
-    = f.label :password
-    = f.text_field :password 
+    = label_tag :password
+    = password_field_tag :password
   
   .field
-    = f.submit 'Sign in'
+    = submit_tag 'Sign in'
     %span or #{link_to 'sign up', sign_up_path}
