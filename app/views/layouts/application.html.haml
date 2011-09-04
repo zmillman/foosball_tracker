@@ -1,0 +1,14 @@
+!!! Strict
+%html
+  %head
+    
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|Josefin+Sans:400,700'
+
+    %title Foosball League!
+    
+  %body
+    #body_wrapper
+      = yield

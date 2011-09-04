@@ -7,6 +7,16 @@ gem 'rails', '3.1.0'
 
 gem 'sqlite3'
 
+# Template engines
+
+gem 'haml'
+
+# Asset template engines
+
+gem 'json'
+gem 'sass'
+gem 'coffee-script'
+# gem 'therubyracer' #javascript executable
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,4 +42,5 @@ group :test do
   gem 'turn', :require => false
 end
 
+# Miscellaneous
 gem 'inherited_resources'

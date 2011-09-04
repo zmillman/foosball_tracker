@@ -44,6 +44,7 @@ GEM
     erubis (2.7.0)
     execjs (1.2.4)
       multi_json (~> 1.0)
+    haml (3.1.2)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.0)
@@ -53,6 +54,7 @@ GEM
     jquery-rails (1.0.13)
       railties (~> 3.0)
       thor (~> 0.14)
+    json (1.5.4)
     mail (2.3.0)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -114,9 +116,13 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.1.0)
+  coffee-script
+  haml
   inherited_resources
   jquery-rails
+  json
   rails (= 3.1.0)
+  sass
   sass-rails (~> 3.1.0)
   sqlite3
   turn
