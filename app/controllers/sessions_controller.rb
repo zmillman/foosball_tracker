@@ -1,5 +1,3 @@
-Session = Struct.new(:email, :password)
-
 class SessionsController < ApplicationController
   
   inherit_resources

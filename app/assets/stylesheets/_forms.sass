@@ -1,3 +1,5 @@
+$primary_button_color: #ff6c00
+
 form  
   .field
     @include clearfix
@@ -23,12 +25,19 @@ form
 
 input[type="text"], input[type="password"]
   padding: $grid/4
-  border: 1px solid #ccc
+  border: 1px solid #aaa
+  @include rounded
+  &:focus
+    background: #fffbe3
     
 input[type="submit"]
-  background: #ff6c00
+  font-size: 80%
+  background: $primary_button_color
+  background-image: -moz-linear-gradient(center top, $primary_button_color, darken($primary_button_color, 15%))
+  border: 1px solid darken($primary_button_color, 15%)
   color: #fff
-  border: 1px solid
-  height: $grid * 2
-  padding: $grid/2 $grid
+  line-height: 2 * $grid
+  padding: $grid/4 $grid
+  margin-right: $grid/2
   @include rounded
+  cursor: pointer

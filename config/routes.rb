@@ -3,6 +3,7 @@ FoosballLeague::Application.routes.draw do
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
+  resources :sessions, :actions => [:new, :create, :destroy]
   
   get "sign_up" => "users#new", :as => "sign_up"
   
