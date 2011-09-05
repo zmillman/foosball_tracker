@@ -1,0 +1,12 @@
+
+%h1 Game #{resource.id}
+
+.row
+  - resource.scores.each do |score|
+    .columns.span8
+      %h2= score.goals
+      - score.players.each do |player|
+        %p #{player.position}: #{player.user.name}
+.section
+  = link_to 'Edit', edit_resource_path
+  = link_to 'Back to List', collection_path

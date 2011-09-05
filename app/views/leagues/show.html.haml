@@ -1,0 +1,35 @@
+- provide :title, resource.name
+%h1
+  #{resource.name}
+.section
+  %p
+    Started by #{link_to resource.owner.name, resource.owner}
+    
+    = link_to 'Return to league listing', collection_path
+    |
+    = link_to 'Edit', edit_resource_path
+    |
+    
+.section
+  %h2
+    Games
+    %small= link_to 'add a game', [:new, resource, :game]
+  - if resource.games.empty?
+    %p
+      %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
+    %p
+      %em You should #{link_to 'add one', [:new, resource, :game]}.
+        
+  - else
+    = render :partial => 'games/game', :collection => resource.games 
+.section
+  %h2 Members
+  - if current_user && !current_user.league_ids.include?(resource.id)
+    %p= link_to '(join)', league_league_memberships_path(resource, :league_membership => {:user_id => current_user.id}), :method => :post
+
+.row
+  - resource.users.each do |user|
+    .span2
+      = link_to image_tag(user.gravatar_url(:size => 30)), user
+      = link_to user.name, user
+    

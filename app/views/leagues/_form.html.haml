@@ -1,0 +1,8 @@
+= form_for resource do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+    
+  .actions
+    = f.submit
+    = link_to 'Cancel', (resource.new_record? ? collection_path : resource_path), :class => 'btn'

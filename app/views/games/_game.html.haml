@@ -1,0 +1,8 @@
+
+.row
+  - game.scores.each do |score|
+    .span1
+      %h3= score.goals
+    - score.players.each do |player|
+      .span3
+        %p= player.user.name

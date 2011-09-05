@@ -1,44 +1,61 @@
-$primary_button_color: #ff6c00
+$primary_button_color: #FFEA00
+$secondary_button_color: #f5f5f5
 
-form  
+form
+  label
+    font-weight: 700  
   .field
     @include clearfix
-    padding: $grid / 2
-    label
+    padding: $grid 2 * $grid
+    label, input
       float: left
-      text-align: right
-      min-width: $grid * 5
-      padding-right: $grid
-    input
-      margin-left: 6 * $grid
-      float: left
-    label+input
-      margin-left: 0
-  &.stacked
-    label
-      text-align: left
       clear: both
-    input
-      margin-left: 0
-      clear: both
-    
 
-input[type="text"], input[type="password"]
-  padding: $grid/4
+  
+
+input[type="text"], input[type="password"], select
+  padding: $grid/2 - 1
   border: 1px solid #aaa
-  width: 20 * $grid
+  width: 13 * $grid
   @include rounded
   &:focus
     background: #fffbe3
-    
-input[type="submit"]
+
+input[type="submit"], .btn
+  float: left
   font-size: 80%
-  background: $primary_button_color
-  background-image: -moz-linear-gradient(center top, $primary_button_color, darken($primary_button_color, 15%))
-  border: 1px solid darken($primary_button_color, 15%)
-  color: #fff
-  line-height: 2 * $grid
-  padding: $grid/4 $grid
-  margin-right: $grid/2
+  padding: 3 * $grid/4 $grid
   @include rounded
+  border: 1px solid darken($primary_button_color, 15%)
+  color: #222
+  margin-right: $grid/2
+  line-height: 2 * $grid
   cursor: pointer
+  &:hover, &:focus
+   
+.btn
+  height: 17px
+  line-height: 17px
+  color: #555
+  background-image: -moz-linear-gradient(center top, $secondary_button_color, darken($secondary_button_color, 10%))
+  border: 1px solid darken($secondary_button_color, 15%)
+  text-shadow: #fff 1px 1px 1px
+  &:hover, &:focus
+    background-image: -moz-linear-gradient(center top, lighten($secondary_button_color, 2%), darken($secondary_button_color, 5%)) 
+    
+input[type="submit"], .submit
+  background: $primary_button_color
+  background-image: -moz-linear-gradient(center top, $primary_button_color, darken($primary_button_color, 10%))
+  text-shadow: lighten($primary_button_color, 10%) 1px 1px 1px
+  &:hover, &:focus
+    background-image: -moz-linear-gradient(center top, lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
+    
+  
+  
+a.btn
+  text-decoration: none
+  
+.actions
+  padding: $grid $grid * 2
+  width: 100%
+  border-top: 1px solid #e3e3e3

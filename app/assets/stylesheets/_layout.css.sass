@@ -1,34 +1,76 @@
-$columns_count: 16
-$content_width: (3 * $columns_count + 1) * $grid
+$columns_count: 8
+$columns_width: 3 * $grid
+$columns_gutter_width: 2 * $grid
+$content_width: $columns_width * $columns_count + $columns_gutter_width * ($columns_count - 1) 
 body
-  background: #ddd
+  //background: #ddd
+
+.header_bar
+  width: $content_width
+  height: 4 * $ygrid
+  padding: $ygrid 1.5 * $grid
+  margin: 0 auto $ygrid auto
+  clear: both
+  background: #f4f4f4
+  @include rounded(bottom, 2px)
+  .wordmark
+    float: left
+    font-size: 18px
+    height: 4 * $ygrid
+  .links
+    padding: 0.5 * $ygrid 0
+    height: 3 * $ygrid
+    float: right
+  ul
+    list-style: none
+    float: right
+    li
+      float: left
+      padding-left: $grid
+  a
+    color: inherit
     
+        
 #body_wrapper
+  clear: both
   margin: 0 auto
   width: $content_width
   background: #fff
   overflow: hidden
-  padding: $grid $grid 0 $grid
-  
+  padding: $grid 0 0 0
+ 
+ 
+.spacer, .spacer1, .spacer2, .spacer3
+  width: 100%
+  height: 3 * $ygrid
+  clear: both
+.spacer1
+  height: $ygrid
+.spacer2
+  height: 2 * $ygrid
+   
 .row, .section
   float: left
   clear: both
-  margin-bottom: $grid
+  margin-bottom: $ygrid * 2
   
 .row
-  margin-left: -$grid
-  
-.columns
-  float: left	
-  margin-left: $grid
-  @for $colspan from 1 through $columns_count
-    &.span#{$colspan}
-      width: 2 * $colspan * $grid + ($colspan - 1) * $grid
+  margin-left: - $columns_gutter_width
       
-  // Offset classes
-  @for $offset from 1 through ($columns_count - 1)
-    &.offset#{$offset}
-      margin-left: 3 * $offset * $grid
-  &.highlight
-    text-align: center
-    background: #bbb
+// Span classes
+@for $colspan from 1 through $columns_count
+  .span#{$colspan}
+    float: left 
+    margin-left: 2 * $grid
+    width: $colspan * $columns_width + ($colspan - 1) * $columns_gutter_width
+    
+// Offset classes
+@for $offset from 1 through ($columns_count - 1)
+  .offset#{$offset}
+    margin-left: $offset * ($columns_width + $columns_gutter_width)
+    
+.score
+  .goals
+    font-size: 24px
+  .players
+  

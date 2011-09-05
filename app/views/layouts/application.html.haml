@@ -5,16 +5,19 @@
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|Josefin+Sans:400,700'
-
-    %title Foosball League!
+    = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|Pacifico'
+    
+    %link{:rel => "shortcut icon", :href => asset_path('favicon.ico')}/
+    
+    %title Foosball Tracker. #{yield :title}
     
   %body
+    = render 'header'
     #body_wrapper
       - unless flash[:notice].blank?
         .alert.block
           %p= flash[:notice]
       - unless flash[:alert].blank?
-        .alert.block
+        .alert.block.error
           %p= flash[:alert]
       = yield

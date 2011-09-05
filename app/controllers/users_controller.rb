@@ -1,18 +1,15 @@
 class UsersController < ApplicationController
   
+  before_filter :login_required, :except => [:new, :create]
+  
   inherit_resources
   
   def create
-    create! do
-      current_user = resource
-      return resource_path
+    create! do |success, failure|
+      success.all do
+        self.current_user = resource
+        redirect_to dashboard_path
+      end
     end
   end
-  
-  private
-  
-  def resource
-    @user = current_user
-  end
-  
 end

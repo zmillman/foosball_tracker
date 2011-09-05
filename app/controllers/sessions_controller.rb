@@ -6,9 +6,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      flash.now.notice = "Hello"
       self.current_user = user
-      redirect_to user
+      redirect_to dashboard_path
     else
       flash.now.alert = "Invalid email or password"
       render "new"
@@ -16,7 +15,7 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    current_user = nil
+    self.current_user = nil
     redirect_to login_path
   end
   

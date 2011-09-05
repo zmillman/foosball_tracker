@@ -1,15 +1,24 @@
 FoosballLeague::Application.routes.draw do
   
+  get 'home' => "pages#home"
+  
   get "login" => "sessions#new"
   post "login" => "sessions#create"
   get "logout" => "sessions#destroy"
-  resources :sessions, :actions => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create, :destroy]
   
-  get "sign_up" => "users#new", :as => "sign_up"
+  get "signup" => "users#new", :as => "sign_up"
   
-  resources :users, :actions => [:new, :create, :show]
+  resources :users, :only => [:edit, :show, :new, :create]
   
-  root :to => "sessions#new"
+  resources :leagues do
+    resources :games, :except => :index
+    resources :league_memberships
+  end
+  
+  resource :dashboard
+  
+  root :to => "pages#home"
   
   
   # The priority is based upon order of creation:

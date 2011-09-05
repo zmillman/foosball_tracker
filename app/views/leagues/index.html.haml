@@ -1,0 +1,16 @@
+%h1 Leagues
+
+
+- if collection.empty?
+  %p
+    %em Hmmmm...
+    looks like no one's started any leagues yet.
+  - if current_user
+    %p Why don't you go ahead and #{link_to 'start one', new_resource_path}?
+       
+- else
+  = render :partial => 'league', :collection => collection
+
+  - if current_user
+    .section.actions
+      = link_to 'Start a new league', new_resource_path

@@ -1,0 +1,8 @@
+%h1 Dashboard
+
+%h3 Your Leagues
+- if current_user.leagues.empty?
+  %p
+    %em Looks like you aren't in any leagues yet. You should #{link_to 'join one', leagues_path}.
+- else
+  = render :partial => 'leagues/league', :collection => current_user.leagues

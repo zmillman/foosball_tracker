@@ -5,6 +5,7 @@
 
 /* Global variables */
 $grid: 10px
+$ygrid: 6px
 
 /* Mixins */
 @mixin clearfix
@@ -15,6 +16,12 @@ $grid: 10px
     border-radius: $radius
     -moz-border-radius: $radius
     -webkit-border-radius: $radius
+  @else if ($side == bottom)
+    @each $subside in bottom-left, bottom-right
+      @include rounded($subside, $radius)
+  @else if ($side == top)
+    @each $subside in top-left, top-right
+      @include rounded($subside, $radius)
   @else
     border-#{$side}-radius: $radius
     -moz-border-radius-#{$side}: $radius

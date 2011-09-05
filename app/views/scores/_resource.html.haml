@@ -1,0 +1,5 @@
+%td
+  %h3= resource.goals
+  - resource.players.each do |player| 
+    %div #{player.user.name} - #{player.position}
+  

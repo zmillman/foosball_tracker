@@ -1,17 +1,47 @@
 body
-  font-family: 'Josefin Sans', sans-serif
+  font: 14px / #{(3 * $ygrid)} Arial, sans-serif
+  color: #333
   
 h1, h2, h3
-  font: 16px 
+  font:
     family: 'PT Sans Caption', sans-serif
-  font-weight: 700
+    weight: 700
+  margin-bottom: $ygrid * 2
+  small
+    color: #666
+    font-size: 70%
   
 h1
   font-size: 48px
+  line-height: 48px
+  
 h2
   font-size: 36px
+  line-height: 36px
+  
 h3
   font-size: 24px
+  line-height: 24px
  
 p
-  margin-bottom: $grid
+  margin-bottom: 2 * $ygrid
+
+a
+  //color: #46A546
+  color: #E67D49
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+    
+.wordmark
+  font:
+    family: Pacifico, cursive
+    weight: bold
+  color: #E67D49
+  text-shadow: #d7d7d7 1px 1px 0
+  a
+    color: inherit
+    
+h1, h2, h3
+  .wordmark
+    text-shadow: #aaa 1px 1px 0

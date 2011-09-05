@@ -1,3 +1,13 @@
-%h2 Hello #{current_user.name}
-
-%p= link_to 'Edit', edit_resource_path
+%h1= resource.name
+- if resource == current_user
+  .section
+    %p= link_to 'Edit profile', edit_resource_path
+%h2 Your Leagues
+- if resource.leagues.empty?
+  %p
+    %em #{resource.name} isn't in any leagues yet
+- else
+  .row
+    - resource.leagues.each do |league|
+      .columns.span4= render :partial => 'leagues/league', :object => league
+%p= link_to 'View leagues', leagues_path

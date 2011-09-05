@@ -44,3 +44,4 @@ end
 
 # Miscellaneous
 gem 'inherited_resources'
+gem 'gravtastic'

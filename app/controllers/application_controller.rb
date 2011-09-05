@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
     logger.debug("user_id set to: #{session[:user_id]}")
   end
   
+  def login_required
+    current_user || redirect_to(login_path, :error => 'Sorry, you have to log in') 
+  end
+  
 end

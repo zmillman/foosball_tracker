@@ -1,0 +1,21 @@
+= form_for resource, :url => league_games_path(resource.league), :html => {:class => 'stacked'} do |f| 
+  .row
+    - team_letters = ['A', 'B']
+    = f.fields_for :scores do |score_form|
+      .columns.span4
+        %h2 Team #{team_letters.shift}
+        
+        .field
+            
+          = score_form.label :goals
+          = score_form.text_field :goals
+          
+        = score_form.fields_for :players do |players_form|
+          .field
+            = players_form.hidden_field :position
+            = players_form.label :user_id, players_form.object.position
+            = players_form.collection_select :user_id, resource.league.users.all, :id, :name
+        
+  .section.actions
+    = f.submit 'Save Game'
+    = link_to 'Cancel', collection_path, :class => 'btn'  

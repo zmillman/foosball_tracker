@@ -1,0 +1,10 @@
+%h1 Listing games
+
+.section
+  %table
+    %thead
+      
+    %tbody= render :partial => 'row', :collection => collection
+  
+.section
+  = link_to 'New Game', new_resource_path
