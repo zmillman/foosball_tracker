@@ -5,5 +5,5 @@ en:
   flash:
     users:
       create:
-        notice: "Cool, you're in the system now. Have fun!"
+        notice: "Nice to meet you, %{user_name}. You're in the system now."
   

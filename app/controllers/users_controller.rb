@@ -12,4 +12,10 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  private
+  
+  def interpolation_options
+    {:user_name => resource.name}
+  end
 end
