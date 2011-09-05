@@ -24,7 +24,7 @@ gem 'json'
 gem 'sass'
 gem 'coffee-script'
 group :production do
-  gem 'therubyracer' #javascript executable
+  # gem 'therubyracer' #javascript executable
 end
 
 # Gems used only for assets and not required
