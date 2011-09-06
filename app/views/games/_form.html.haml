@@ -3,8 +3,7 @@
   .row
     = f.fields_for :teams do |team_form|
       .columns.span6
-        .field
-            
+        .field            
           = team_form.label :goals
           = team_form.text_field :goals
           
