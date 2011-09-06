@@ -9,9 +9,10 @@ gem 'rails', '3.1.0'
 group :production do
   gem 'pg'
 end
-group :developement, :test do
+group :development, :test do
   gem 'sqlite3'
 end
+
 
 # Template engines
 
