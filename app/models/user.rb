@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
   validates_length_of :name, :minimum => 1
   
   def win_rate
-    1.0 * wins_count / losses_count
+    if losses_count > 0
+      1.0 * wins_count / losses_count
+    else
+      wins_count > 0 ? 1.0 : 0.0      
+    end
   end
   
   def wins
