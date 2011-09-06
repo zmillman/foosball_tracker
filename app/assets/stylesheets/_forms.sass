@@ -7,23 +7,28 @@ form
   .field
     @include clearfix
     padding: $grid 2 * $grid
-    label, input, select
+    label, input, select, textarea
       float: left
       clear: both
+  .field_with_errors
+    input, select, textarea
+      border-color: $error_color
 
-  
 
-input[type="text"], input[type="password"], select
+input[type="text"], input[type="password"], select, textarea
   padding: $grid/2 - 1
   border: 1px solid #aaa
-  width: 13 * $grid
+  width: 23 * $grid
   @include rounded
   &:focus
     background: #fffbe3
+textarea
+  height: 20 * $ygrid
+  font: inherit
 
 input[type="submit"], .btn
   float: left
-  font-size: 80%
+  font-size: 11.2px
   padding: 3 * $grid/4 $grid
   @include rounded
   border: 1px solid darken($primary_button_color, 15%)

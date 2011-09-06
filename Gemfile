@@ -7,8 +7,12 @@ gem 'rails', '3.1.0'
 
 # Gems used for interfacing with the database
 
-gem 'sqlite3'
-
+group :production do
+  gem 'pg'
+end
+group :development, :test do
+  gem 'sqlite3'
+end
 
 # Template engines
 

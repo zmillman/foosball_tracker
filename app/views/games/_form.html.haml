@@ -1,17 +1,14 @@
 = form_for resource, :url => league_games_path(resource.league), :html => {:class => 'stacked'} do |f|
   = render :partial => 'shared/error_messages', :locals => {:target => resource} 
   .row
-    - team_letters = ['A', 'B']
-    = f.fields_for :scores do |score_form|
+    = f.fields_for :teams do |team_form|
       .columns.span6
-        %h2 Team #{team_letters.shift}
-        
         .field
             
-          = score_form.label :goals
-          = score_form.text_field :goals
+          = team_form.label :goals
+          = team_form.text_field :goals
           
-        = score_form.fields_for :players do |players_form|
+        = team_form.fields_for :players do |players_form|
           .field
             = players_form.hidden_field :position
             = players_form.label :user_id, players_form.object.position

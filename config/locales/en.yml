@@ -2,6 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  date:
+    formats:
+      short: "%b %d"
+  time:
+    formats:
+      short: "%b %d"
   flash:
     games:
       create: "Game was succesfully recorded."

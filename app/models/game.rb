@@ -2,29 +2,40 @@ class Game < ActiveRecord::Base
   has_many :teams
   belongs_to :league
   
-  accepts_nested_attributes_for :scores
+  accepts_nested_attributes_for :teams
   
   before_validation :mark_winner, :on => :create
   
-  validates_size_of :scores, :is => 2
-  validates_each :scores do |record, attr, value|
-    record.errors.add attr, "There must be a winner" if value.select(&:is_winner?).size < 1
-    record.errors.add attr, "There mustn't be more than one winner" if value.select(&:is_winner?).size > 1
+  validates_size_of :teams, :is => 2
+  validates_each :teams do |record, attr, value|
+    record.errors.add '', "One of the teams must have at least 10 goals" if value.select(&:is_winner?).size < 1
+    record.errors.add '', "There can't be more than one winner! How did you even get this error?" if value.select(&:is_winner?).size > 1
+    
+    # TODO check for duplicate players
+    #TODO validate scores for overtime games
   end
   
   # Initialize for a doubles match
   def build_for_doubles
-    2.times{scores.build}
-    scores.each{|s| s.players.build({:position => 'Offense'}); s.players.build({:position => 'Defense'})}
+    u_ids = league.users.first(4)
+    2.times{teams.build}
+    teams.each do |s|
+      s.players.build({:position => 'Offense', :user_id => u_ids.shift})
+      s.players.build({:position => 'Defense', :user_id => u_ids.shift})
+    end
   end
   
   # Initialize for a singles match
   def build_for_singles
-    2.times{scores.build}
-    scores.each{|s| s.players.build({:position => 'Offense'})}
+    u_ids = league.users.first(2)
+    2.times{teams.build}
+    teams.each do |s|
+      s.players.build({:position => 'Offense'})
+    end
   end
   
   def mark_winner
-    scores.sort_by(&:goals).last.is_winner = true
+    winning_team = teams.reject{|team| team.goals < 10}.sort_by(&:goals).last
+    winning_team.is_winner = true unless winning_team.nil?
   end
 end

@@ -25,4 +25,24 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_length_of :name, :minimum => 1
   
+  def win_rate
+    1.0 * wins_count / losses_count
+  end
+  
+  def wins
+    games.merge(Team.where(:is_winner => true))
+  end
+  
+  def losses
+    games.merge(Team.where(:is_winner => false))
+  end
+  
+  def wins_count
+    teams.where(:is_winner => true).count
+  end
+  
+  def losses_count
+    teams.where(:is_winner => false).count
+  end
+  
 end

@@ -2,8 +2,8 @@
   background: #E8FFE8
   border: 1px solid #D0F2D0
   &.error
-    background: #FFF3ED
-    border-color: #FFDFCF
+    background: mix($error_color, white, 20%)
+    border-color: mix($error_color, white, 40%)
   &.block
     padding: $grid - 1 2 * $ygrid - 1
     margin: 0 -2 * $grid $ygrid -2 * $grid

@@ -1,8 +1,4 @@
 - if target.errors.any? 
   .alert.block.error
-    %h3
-      Oh no!
-      
-    %ul
-      - target.errors.full_messages.each do |msg|
-        %li= msg
+    - target.errors.full_messages.each do |msg|
+      %p= msg

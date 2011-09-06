@@ -3,6 +3,10 @@
     = f.label :name
     = f.text_field :name
     
+  .field
+    = f.label :description
+    = f.text_area :description
+    
   .actions
     = f.submit
     = link_to 'Cancel', (resource.new_record? ? collection_path : resource_path), :class => 'btn'

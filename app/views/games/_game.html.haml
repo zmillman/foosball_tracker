@@ -1,13 +1,17 @@
 
-.row
-  - game.scores.each do |score|
-    .span1
-      - if score.is_winner?
-        %h3= score.goals
-      - else
-        %p= score.goals
-    .span3
-      - if score.is_winner?
-        %strong= score.players.collect{|p| p.user.name}.join(' & ')
-      - else
-        = score.players.collect{|p| p.user.name}.join(' & ')
+.row.game
+  .span6.title= link_to (l game.created_at, :format => :short), [game.league, game]
+  - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
+    .span3.team
+      - if team.is_winner?  
+        .score
+          %strong= team.goals
+        %p
+          %strong= team.players.collect{|p| p.user.name}.join(' & ')
+          
+      - else  
+        .score
+          = team.goals
+        %p
+          = team.players.collect{|p| p.user.name}.join(' & ')
+          

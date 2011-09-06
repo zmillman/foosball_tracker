@@ -1,6 +1,6 @@
 - game = row
 %tr
   %td= link_to "Game #{game.id}", resource_path(game)
-  %td= render :partial => 'scores/resource', :collection => game.scores 
+  %td= render :partial => 'teams/resource', :collection => game.teams 
   %td= link_to 'Edit', edit_resource_path(game)
   %td= link_to 'Destroy', resource_path(game), confirm: 'Are you sure?', method: :delete

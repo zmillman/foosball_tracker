@@ -1,24 +1,36 @@
 - provide :title, resource.name
+    
 %h1
   #{resource.name}
-.section
-  %p
-    Started by #{link_to resource.owner.name, resource.owner}
-    
-    = link_to 'Return to league listing', collection_path
-    |
-    = link_to 'Edit', edit_resource_path
-    |
-    
 
-.row
+%p
+  %em
+    - unless resource.description.blank?
+      = resource.description
+    
+    (started by #{link_to resource.owner.name, resource.owner})
+    - if resource.authorized?(:edit, current_user)
+      = link_to 'Edit', edit_resource_path
+            
+- if current_user && !current_user.league_ids.include?(resource.id)
+  .section
+    = link_to 'Join this league', league_league_memberships_path(resource, :league_membership => {:user_id => current_user.id}), :method => :post, :class => 'btn submit'
+    = link_to 'Return to league listing', collection_path, :class => 'btn'
+
+.row  
+  .span4
+    %h2 Players
+    - resource.users.each do |user|
+      .row
+        .span1= link_to image_tag(user.gravatar_url(:size => 32)), user
+        .span3
+          %strong= user.name
+          %br
+          %small (#{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'})
   .span8
-    .row
-      .span5
-        %h2
-          Games
-      .span3.right
-        = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit'
+    %h2
+      Games
+      = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
     
     - if resource.games.empty?
       %p
@@ -26,17 +38,6 @@
       %p
         %em You should #{link_to 'add one', [:new, resource, :game]}.
     - else
-      = render :partial => 'games/game', :collection => resource.games
-       
-  .span4
-    .spacer2
-    %h3 Rankings
-    - if current_user && !current_user.league_ids.include?(resource.id)
-      %p= link_to '(join)', league_league_memberships_path(resource, :league_membership => {:user_id => current_user.id}), :method => :post
+      = render :partial => 'games/game', :collection => resource.games.order('games.created_at DESC')
+         
   
-  
-    - resource.users.each do |user|
-      .section
-        = link_to image_tag(user.gravatar_url(:size => 30)), user
-        = link_to user.name, user
-    
