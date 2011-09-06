@@ -1,11 +1,11 @@
 - provide :title, 'Sign in'
 
 .row
-  .span4.offset2
-    %h2 Welcome!
+  .span6
+    %h2 Hello again.
 
-    %p Come on in.
+    %p I guess you've already got an account, so you know the drill. Just sign in over there and you're good to go.
       
-    %p If you don't already have an account, you can #{link_to 'sign up here', sign_up_path}.
-  .span4
+    %p What's that? You don't have an account? That's okay, you can #{link_to 'get one here', sign_up_path}.
+  .span6
     = render 'form'

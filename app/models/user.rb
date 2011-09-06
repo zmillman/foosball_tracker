@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   has_many :owned_leagues, :class_name => 'League', :foreign_key => :owner_id 
   
   validates_confirmation_of :password  
-  validates_presence_of :password, :on => :create  
+  validates_presence_of :password, :on => :create
+  validates_length_of :password, :on => :create, :minimum => 6
   validates_presence_of :email  
   validates_uniqueness_of :email
   validates_length_of :name, :minimum => 1
