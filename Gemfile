@@ -6,11 +6,10 @@ gem 'rails', '3.1.0'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 # Gems used for interfacing with the database
-
 group :production do
-  gem 'pg' # Use PostgresSQL in production
+  gem 'pg'
 end
-group :development, :test do
+group :developement, :test do
   gem 'sqlite3'
 end
 
@@ -38,9 +37,9 @@ end
 gem 'jquery-rails'
 
 # Use thin as the production web server
-group :production do
+# group :production do
   # gem 'thin'
-end
+# end
 
 # Deploy with Capistrano
 # gem 'capistrano'
