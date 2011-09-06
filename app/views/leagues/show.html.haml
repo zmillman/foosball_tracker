@@ -20,7 +20,7 @@
 .row  
   .span4
     %h2 Players
-    - resource.users.each do |user|
+    - resource.users.sort_by(&:win_rate).reverse.each do |user|
       .row
         .span1= link_to image_tag(user.gravatar_url(:size => 32)), user
         .span3
