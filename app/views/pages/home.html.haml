@@ -1,12 +1,16 @@
+.spacer
+.spacer
+  
 
-%h3 Hey look! It's Zach's
 .row
-  .span8
-    .spacer1
+  .span8.offset2
+    %h3 Hey look! It's Zach's
+    .spacer2
     %h1.wordmark
       Foosball Tracker.
         
-    .spacer2
+    .spacer
+    .spacer1
     .section
       = link_to 'Sounds neat, I want to join', sign_up_path, :class => 'btn submit'
       = link_to 'I already have an account', login_path, :class => 'btn'
