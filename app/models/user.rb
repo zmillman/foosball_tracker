@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   
   has_many :players
-  has_many :scores, :through => :players
-  has_many :games, :through => :scores
+  has_many :teams, :through => :players
+  has_many :games, :through => :teams
   
   has_many :league_memberships
   has_many :leagues, :through => :league_memberships

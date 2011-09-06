@@ -3,6 +3,8 @@
 
 en:
   flash:
+    games:
+      create: "Game was succesfully recorded."
     users:
       create:
         notice: "Nice to meet you, %{user_name}. You're in the system now."

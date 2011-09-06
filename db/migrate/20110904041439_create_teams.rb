@@ -1,6 +1,6 @@
-class CreateScores < ActiveRecord::Migration
+class CreateTeams < ActiveRecord::Migration
   def change
-    create_table :scores do |t|
+    create_table :teams do |t|
       t.references :game
       t.integer :goals, :default => 0
       t.boolean :is_winner, :default => false
