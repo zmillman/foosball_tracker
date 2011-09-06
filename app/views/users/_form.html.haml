@@ -9,10 +9,15 @@
     = f.label :email
     = f.text_field :email
     
-  .field
-    = f.label :password
-    = f.password_field :password 
+  - if resource.new_record?
+    .field
+      = f.label :password
+      = f.password_field :password 
   
-  .field
-    = f.submit 'Create my account'
+    .field
+      = f.submit 'Create my account'
+  - else
+    .section.actions
+      = f.submit 'Save'
+      = link_to 'Cancel', show_resource_path, :class => 'btn'
   

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create]
   
   inherit_resources
+  actions :show, :new, :create, :edit, :update
   
   def create
     create! do |success, failure|

@@ -9,7 +9,7 @@ FoosballLeague::Application.routes.draw do
   
   get "signup" => "users#new", :as => "sign_up"
   
-  resources :users, :only => [:edit, :show, :new, :create]
+  resources :users, :only => [:show, :new, :create, :edit, :update]
   
   resources :leagues do
     resources :games, :except => :index
