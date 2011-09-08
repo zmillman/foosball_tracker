@@ -15,6 +15,6 @@
     %h2= pluralize resource.wins_count, 'Win'
     = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC')
   .span6
-    %h2= pluralize resource.wins_count, 'Loss'
+    %h2= pluralize resource.losses_count, 'Loss'
     = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC')
       
