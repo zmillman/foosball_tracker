@@ -1,4 +1,4 @@
-= form_for resource, :url => league_games_path(resource.league), :html => {:class => 'stacked'} do |f|
+= form_for [resource.league, resource], :html => {:class => 'stacked'} do |f|
   = render :partial => 'shared/error_messages', :locals => {:target => resource} 
   .row
     = f.fields_for :teams do |team_form|
