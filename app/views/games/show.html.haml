@@ -12,3 +12,6 @@
       - team.players.each do |player|
         %p #{player.position}: #{player.user.name}
         
+.section.actions
+  = link_to 'Edit game', edit_resource_path, :class => 'btn'
+        
