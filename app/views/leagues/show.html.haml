@@ -21,12 +21,7 @@
   .span4
     %h2 Players
     - resource.users.sort_by(&:win_rate).reverse.each do |user|
-      .row
-        .span1= link_to image_tag(user.gravatar_url(:size => 32)), user
-        .span3
-          %strong= user.name
-          %br
-          %small (#{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'})
+      .row= render :partial => 'users/user', :object => user
   .span8
     %h2
       Games

@@ -10,7 +10,8 @@
     .span6
       %h2= team.goals
       - team.players.each do |player|
-        %p #{player.position}: #{player.user.name}
+        %h3= player.position
+        .row= render :partial => 'users/user', :object => player.user
         
 .section.actions
   = link_to 'Return to league', resource.league, :class => 'btn submit'
