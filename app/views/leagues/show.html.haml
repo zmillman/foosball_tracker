@@ -26,13 +26,13 @@
     %h2
       Games
       = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
-    
-    - if resource.games.empty?
-      %p
-        %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
-      %p
-        %em You should #{link_to 'add one', [:new, resource, :game]}.
-    - else
-      = render :partial => 'games/game', :collection => resource.games.order('games.created_at DESC')
+    .row.span8
+      - if resource.games.empty?
+        %p
+          %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
+        %p
+          %em You should #{link_to 'add one', [:new, resource, :game]}.
+      - else
+        = render :partial => 'games/game', :collection => resource.games.order('games.created_at DESC')
          
   

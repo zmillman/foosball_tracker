@@ -11,10 +11,10 @@
   %p=raw resource.leagues.collect{|league| link_to league.name, league}.join(', ')
       
 .row
-  .span6
+  .span8
     %h2= pluralize resource.wins_count, 'Win'
     = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC')
-  .span6
+  .span8
     %h2= pluralize resource.losses_count, 'Loss'
     = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC')
       
