@@ -38,9 +38,9 @@ end
 gem 'jquery-rails'
 
 # Use thin as the production web server
-# group :production do
-#  gem 'thin'
-# end
+group :production do
+  gem 'thin'
+end
 
 # Deploy with Capistrano
 # gem 'capistrano'
