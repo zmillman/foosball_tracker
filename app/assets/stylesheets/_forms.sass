@@ -36,7 +36,7 @@ input[type="submit"], .btn
   margin-right: $grid/2
   line-height: 2 * $grid
   cursor: pointer
-  &:hover, &:focus
+  //&:hover, &:focus
    
 .btn
   height: 17px
@@ -53,7 +53,7 @@ input[type="submit"], .submit
   @include gradient($primary_button_color, darken($primary_button_color, 10%))
   text-shadow: lighten($primary_button_color, 10%) 1px 1px 1px
   &:hover, &:focus
-    @include gradient(center top, lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
+    @include gradient(lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
     
   
   
