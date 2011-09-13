@@ -42,18 +42,18 @@ input[type="submit"], .btn
   height: 17px
   line-height: 17px
   color: #555
-  background-image: -moz-linear-gradient(center top, $secondary_button_color, darken($secondary_button_color, 10%))
+  @include gradient($secondary_button_color, darken($secondary_button_color, 10%))
   border: 1px solid darken($secondary_button_color, 15%)
   text-shadow: #fff 1px 1px 1px
   &:hover, &:focus
-    background-image: -moz-linear-gradient(center top, lighten($secondary_button_color, 2%), darken($secondary_button_color, 5%)) 
+    @include gradient(lighten($secondary_button_color, 2%), darken($secondary_button_color, 5%)) 
     
 input[type="submit"], .submit
   background: $primary_button_color
-  background-image: -moz-linear-gradient(center top, $primary_button_color, darken($primary_button_color, 10%))
+  @include gradient($primary_button_color, darken($primary_button_color, 10%))
   text-shadow: lighten($primary_button_color, 10%) 1px 1px 1px
   &:hover, &:focus
-    background-image: -moz-linear-gradient(center top, lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
+    @include gradient(center top, lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
     
   
   
