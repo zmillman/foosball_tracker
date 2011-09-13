@@ -22,7 +22,7 @@
     %h2 Players
     - resource.users.sort_by(&:win_rate).reverse.each do |user|
       .row= render :partial => 'users/user', :object => user
-  .span8
+  .span12
     %h2
       Games
       = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
