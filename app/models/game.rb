@@ -18,7 +18,8 @@ class Game < ActiveRecord::Base
   # Initialize for a doubles match
   def build_for_doubles
     u_ids = league.users.first(4)
-    2.times{teams.build}
+    teams.build(:goals => 10 )
+    teams.build(:goals => 0)
     teams.each do |s|
       s.players.build({:position => 'Offense', :user_id => u_ids.shift})
       s.players.build({:position => 'Defense', :user_id => u_ids.shift})
