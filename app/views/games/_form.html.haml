@@ -11,7 +11,7 @@
           .field
             = players_form.hidden_field :position
             = players_form.label :user_id, players_form.object.position
-            = players_form.collection_select :user_id, resource.league.users.all, :id, :name
+            = players_form.collection_select :user_id, resource.league.users.order(:name).all, :id, :name
         
   .section.actions
     = f.submit 'Save Game'
