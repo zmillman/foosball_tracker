@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
   
   def current_rank
-    User.rank(current_rating)
+    Player.rank(current_rating)
   end
   
   def current_rating
@@ -69,9 +69,5 @@ class User < ActiveRecord::Base
     else
       Player.default_rating
     end
-  end
-  
-  def self.rank(rating)
-    rating.mean - 3 * rating.deviation
   end
 end
