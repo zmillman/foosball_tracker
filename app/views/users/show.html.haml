@@ -15,7 +15,24 @@
   .span8
     %h3 Rating: #{'%0.2f' % resource.current_rank} 
     %p
-      (&mu;=#{'%0.2f' % resource.current_rating.mean}, &sigma;=#{'%0.2f' % resource.current_rating.deviation})    
+      (&mu;=#{'%0.2f' % resource.current_rating.mean}, &sigma;=#{'%0.2f' % resource.current_rating.deviation}) 
+.row
+  .span16
+    #fig{:style => 'height: 300px'}
+
+:coffeescript
+  $ ->
+    data = #{resource.players.collect{|p| [p.created_at.to_i * 1000, Player.rank(p.rating), p.skill_mean]}.to_json}
+    $.plot $('#fig'), [data],
+      series:
+        lines:
+          show: true
+          fill: true
+        points:
+          show: true
+      xaxis:
+        mode: 'time'
+        timeformat: '%b %d'  
 .row
   .span8
     %h3= pluralize resource.wins_count, 'Win'
