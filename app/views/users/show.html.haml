@@ -22,7 +22,7 @@
 
 :coffeescript
   $ ->
-    data = #{resource.players.collect{|p| [p.created_at.to_i * 1000, Player.rank(p.rating), p.skill_mean]}.to_json}
+    data = #{resource.players.order('players.created_at ASC').collect{|p| [p.created_at.to_i * 1000, Player.rank(p.rating), p.skill_mean]}.to_json}
     $.plot $('#fig'), [data],
       series:
         lines:
