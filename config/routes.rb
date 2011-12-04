@@ -12,6 +12,10 @@ FoosballLeague::Application.routes.draw do
   resources :users, :only => [:show, :new, :create, :edit, :update]
   
   resources :leagues do
+    member do
+      post :recalculate_ranks
+    end
+    
     resources :games, :except => :index
     resources :league_memberships
   end

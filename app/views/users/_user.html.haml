@@ -1,5 +1,11 @@
 
-.span1= link_to image_tag(user.gravatar_url(:size => 32)), user
+.span1
+  = link_to image_tag(user.gravatar_url(:size => 32)), user
+  %br
+  %small
+    = user.current_rank.to_i
+    -if Player.provisional_rating?(user.current_rating)
+      *
 .span3
   %strong= user.name
   %br

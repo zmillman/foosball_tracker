@@ -1,7 +1,6 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  
   # Gives the user a gravatar_url method
   include Gravtastic
   is_gravtastic! 
@@ -50,4 +49,29 @@ class User < ActiveRecord::Base
     teams.where(:is_winner => false).count
   end
   
+  def current_rank
+    User.rank(current_rating)
+  end
+  
+  def current_rating
+    if players.exists?
+      players.most_recent.first.rating
+    else
+      Player.default_rating
+    end
+  end
+  
+  # Gives the most recent rating before time
+  def rating_before(time)
+    prev_player = players.where(['players.created_at < ?', time]).most_recent.first
+    if prev_player
+      prev_player.rating
+    else
+      Player.default_rating
+    end
+  end
+  
+  def self.rank(rating)
+    rating.mean - 3 * rating.deviation
+  end
 end

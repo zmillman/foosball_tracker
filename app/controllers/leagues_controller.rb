@@ -6,4 +6,13 @@ class LeaguesController < InheritedResources::Base
     @league.owner = current_user
     create!
   end
+  
+  def recalculate_ranks
+    @league = League.find(params[:id])
+    @league.games.recalculate
+    
+    flash.notice = 'Rankings recalculated'
+    
+    redirect_to @league
+  end
 end

@@ -20,8 +20,10 @@
 .row  
   .span4
     %h2 Players
-    - resource.users.sort_by(&:win_rate).reverse.each do |user|
+    - resource.users.sort_by(&:current_rank).reverse.each do |user|
       .row= render :partial => 'users/user', :object => user
+      
+    %p= link_to 'Recalculate rankings', recalculate_ranks_league_path(resource), :method => :post, :class => 'btn'
   .span12
     %h2
       Games

@@ -1,5 +1,9 @@
+require 'saulabs/trueskill'
+
 class Game < ActiveRecord::Base
-  has_many :teams
+  include Saulabs:: TrueSkill
+  
+  has_many :teams, :dependent => :destroy
   belongs_to :league
   
   accepts_nested_attributes_for :teams
@@ -38,5 +42,38 @@ class Game < ActiveRecord::Base
   def mark_winner
     winning_team = teams.reject{|team| team.goals < 10}.sort_by(&:goals).last
     winning_team.is_winner = true unless winning_team.nil?
+    
+    teams.each do |team|
+      team.players.each do |player|
+        if self.new_record?
+          player.rating = player.user.current_rating
+        else
+          player.rating = player.user.rating_before(self.created_at)
+        end  
+      end
+    end
+    
+    team_ratings = teams.sort_by(&:goals).reverse.collect{|team| team.players.collect(&:rating_for_calculation)}
+    team_ranks = teams.sort_by(&:goals).reverse.collect{|team| team.is_winner ? 1 : 2}
+    
+    logger.debug("Ratings:\n" + team_ratings.inspect)
+    logger.debug("Rankings:\n" + team_ranks.inspect)
+    
+    graph = FactorGraph.new(team_ratings, team_ranks)
+    
+    graph.update_skills
+
+    teams.each do |team|
+      team.players.each do |player|
+        player.rating = player.rating_for_calculation
+      end
+    end
+  end
+  
+  def self.recalculate
+    scoped.find_each do |game|
+      game.mark_winner
+      game.save!
+    end
   end
 end
