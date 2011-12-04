@@ -36,10 +36,6 @@ class Player < ActiveRecord::Base
     Rating.new(@default_skill_mean, @default_skill_deviation)
   end
   
-  def self.provisional_rating?(rating)
-    rating.deviation > @default_skill_deviation / 4
-  end
-  
   def self.rank(rating)
     rating.mean - 2 * rating.deviation
   end
