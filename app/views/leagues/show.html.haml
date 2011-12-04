@@ -41,7 +41,9 @@
         %p
           %em You should #{link_to 'add one', [:new, resource, :game]}.
       - else
-        = render :partial => 'games/game', :collection => resource.games.order('games.created_at DESC')
+        - games_collection = resource.games.order('games.created_at DESC').page(params[:page] || 1)
+        = render :partial => 'games/game', :collection => games_collection
+        = paginate games_collection
 
          
   

@@ -57,3 +57,4 @@ end
 gem 'inherited_resources'
 gem 'gravtastic'
 gem 'trueskill'
+gem 'kaminari'
