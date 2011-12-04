@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_filter :login_required
   
-  caches_page :show
+  caches_action :show, :layout => false
   cache_sweeper :game_sweeper
   
   inherit_resources

@@ -1,7 +1,7 @@
 class LeaguesController < InheritedResources::Base
   before_filter :login_required, :except => [:index, :show]
   
-  caches_page :show
+  caches_action :show, :layout => false
   
   def create
     @league = League.new(params[:league])
