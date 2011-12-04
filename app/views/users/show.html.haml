@@ -1,25 +1,26 @@
 %h1= resource.name
+      
 - if resource == current_user
   .section
-    %p= link_to 'Edit profile', edit_resource_path
+    = link_to 'Edit profile', edit_resource_path
     
-%p
-  %strong Rank: #{'%0.2f' % resource.current_rank}
-  %br
-  Mean: #{'%0.2f' % resource.current_rating.mean} Deviation: #{'%0.2f' % resource.current_rating.deviation}
-
-%h2 Leagues
-- if resource.leagues.empty?
-  %p
-    %em #{resource.name} isn't in any leagues yet
-- else
-  %p=raw resource.leagues.collect{|league| link_to league.name, league}.join(', ')
-      
 .row
   .span8
-    %h2= pluralize resource.wins_count, 'Win'
+    %h3 Leagues
+    - if resource.leagues.empty?
+      %em #{resource.name} isn't in any leagues yet
+    - else
+      =raw resource.leagues.collect{|league| link_to league.name, league}.join(', ')
+    
+  .span8
+    %h3 Rating: #{'%0.2f' % resource.current_rank} 
+    %p
+      (&mu;=#{'%0.2f' % resource.current_rating.mean}, &sigma;=#{'%0.2f' % resource.current_rating.deviation})    
+.row
+  .span8
+    %h3= pluralize resource.wins_count, 'Win'
     = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC')
   .span8
-    %h2= pluralize resource.losses_count, 'Loss'
+    %h3= pluralize resource.losses_count, 'Loss'
     = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC')
       
