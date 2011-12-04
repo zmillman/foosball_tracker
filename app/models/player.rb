@@ -24,7 +24,7 @@ class Player < ActiveRecord::Base
   end
   
   def rating
-    Rating.new(skill_mean, skill_deviation)
+    Rating.new((skill_mean || 0), (skill_deviation || 0)
   end
   
   #temporary copy of rating for Game to use in its rating calculations
