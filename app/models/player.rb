@@ -8,7 +8,7 @@ class Player < ActiveRecord::Base
   validates_inclusion_of :position, :in => ['Offense', 'Defense']
   validates_presence_of :user
   
-  @default_skill_mean = 25.0
+  @default_skill_mean = 100.0
   @default_skill_deviation = @default_skill_mean / 3
   @max_skill_mean = @default_skill_mean * 2
   @min_skill_mean = 0
@@ -37,6 +37,6 @@ class Player < ActiveRecord::Base
   end
   
   def self.rank(rating)
-    rating.mean - 3 * rating.deviation
+    [rating.mean - 3 * rating.deviation, 0].max
   end
 end
