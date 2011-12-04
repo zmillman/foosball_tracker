@@ -12,6 +12,9 @@
       - team.players.each do |player|
         %h3= player.position
         .row= render :partial => 'users/user', :object => player.user
+        - rank_delta = Player.rank(player.rating) - Player.rank(player.user.rating_before(resource.created_at))
+        .span2
+          %p= '%+0.2f' % rank_delta
         
 .section.actions
   = link_to 'Return to league', resource.league, :class => 'btn submit'
