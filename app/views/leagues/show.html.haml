@@ -21,14 +21,20 @@
   .span4
     %h2 Players
     - resource.users.sort_by(&:current_rank).reverse.each do |user|
-      .row= render :partial => 'users/user', :object => user
-      
+      .row
+        .span1
+          = link_to image_tag(user.gravatar_url(:size => 32)), user
+          
+        .span3
+          %strong #{user.name} (#{user.current_rank.to_i})
+          %br
+          %small #{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'}
+
     %p= link_to 'Recalculate rankings', recalculate_ranks_league_path(resource), :method => :post, :class => 'btn'
+      
   .span12
-    %h2
-      Games
-      = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
-    .row.span8
+    %h2 Games #{link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)}
+    .span8
       - if resource.games.empty?
         %p
           %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
@@ -36,5 +42,6 @@
           %em You should #{link_to 'add one', [:new, resource, :game]}.
       - else
         = render :partial => 'games/game', :collection => resource.games.order('games.created_at DESC')
+
          
   
