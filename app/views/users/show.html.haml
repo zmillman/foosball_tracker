@@ -4,7 +4,18 @@
   .section
     = link_to 'Edit profile', edit_resource_path
     
-.row
+.row    
+  .span8
+    %h3
+      Rating:
+      %span#rating{:data => {:default => resource.current_rank}}= '%0.2f' % resource.current_rank
+    %p
+      (&mu;=
+      %span#skill_mean{:data => {:default => resource.current_rating.mean}}= '%0.2f' % resource.current_rating.mean
+      , &sigma;=
+      %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation
+      )
+      
   .span8
     %h3 Leagues
     - if resource.leagues.empty?
@@ -12,10 +23,6 @@
     - else
       =raw resource.leagues.collect{|league| link_to league.name, league}.join(', ')
     
-  .span8
-    %h3 Rating: #{'%0.2f' % resource.current_rank} 
-    %p
-      (&mu;=#{'%0.2f' % resource.current_rating.mean}, &sigma;=#{'%0.2f' % resource.current_rating.deviation}) 
 .row
   .span16
     #fig{:style => 'height: 300px'}
@@ -32,7 +39,22 @@
           show: true
       xaxis:
         mode: 'time'
-        timeformat: '%b %d'  
+        timeformat: '%b %d'
+      grid:
+        hoverable: true
+        mouseActiveRadius: 25
+                
+    $('#fig').bind 'plothover', (event, pos, item) ->
+      if item
+        # highilight(item.series, item.datapoint)
+        $('#rating').text(item.datapoint[1].toFixed(2))
+        $('#skill_mean').text(item.datapoint[2].toFixed(2))
+        $('#skill_deviation').text(((item.datapoint[2] - item.datapoint[1]) / 3).toFixed(2))
+      else
+        $('#rating').text($('#rating').data('default').toFixed(2))
+        $('#skill_mean').text($('#skill_mean').data('default').toFixed(2))
+        $('#skill_deviation').text($('#skill_deviation').data('default').toFixed(2))
+      
 .row
   .span8
     %h3= pluralize resource.wins_count, 'Win'
