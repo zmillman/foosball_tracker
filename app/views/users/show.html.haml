@@ -2,6 +2,11 @@
 - if resource == current_user
   .section
     %p= link_to 'Edit profile', edit_resource_path
+    
+%p
+  %strong Rank: #{'%0.2f' % resource.current_rank}
+  %br
+  Mean: #{'%0.2f' % resource.current_rating.mean} Deviation: #{'%0.2f' % resource.current_rating.deviation}
 
 %h2 Leagues
 - if resource.leagues.empty?
