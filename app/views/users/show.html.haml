@@ -10,11 +10,11 @@
       Rating:
       %span#rating{:data => {:default => resource.current_rank}}= '%0.2f' % resource.current_rank
     %p
-      (&mu;=
-      %span#skill_mean{:data => {:default => resource.current_rating.mean}}= '%0.2f' % resource.current_rating.mean
-      , &sigma;=
-      %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation
-      )
+      = surround '(', ')' do        
+        &mu; = 
+        %span#skill_mean{:data => {:default => resource.current_rating.mean}}= '%0.2f' % resource.current_rating.mean \
+        , &sigma; = 
+        %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation \
     %p
       %small Hover over points on the graph for specific game ratings
       
