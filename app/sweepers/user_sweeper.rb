@@ -15,7 +15,7 @@ class UserSweeper < ActionController::Caching::Sweeper
       # expire_page users_path 
       expire_page user_path(user)
       user.leagues.each do |league|
-        expire_page league_path(league)
+        expire_action(:controller => :leagues, :action => :show, :id => league.id)
       end
     end
 
