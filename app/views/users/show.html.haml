@@ -1,11 +1,10 @@
 .row
-  .span12
+  .span16
     %h1= resource.name
         
 - if resource == current_user
-  .section
-    = link_to 'Edit profile', edit_resource_path
-    
+  %p= link_to 'Edit profile', edit_resource_path
+      
 .row    
   .span8
     %h3
@@ -66,6 +65,8 @@
         $('#skill_mean').text($('#skill_mean').data('default').toFixed(2))
         $('#skill_deviation').text($('#skill_deviation').data('default').toFixed(2))
         myFlot.unlockCrosshair()
+
+%p #{pluralize resource.players.where(:position => 'Offense').count, 'game'} on offense, #{pluralize resource.players.where(:position => 'Defense').count, 'game'} on defense
           
         
 .row
