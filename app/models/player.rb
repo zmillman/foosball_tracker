@@ -27,6 +27,10 @@ class Player < ActiveRecord::Base
     Rating.new((skill_mean || 0), (skill_deviation || 0))
   end
   
+  def rank_delta
+    Player.rank(self.rating) - Player.rank(user.rating_before(self.created_at))
+  end
+  
   #temporary copy of rating for Game to use in its rating calculations
   def rating_for_calculation
     @rating_for_calculation ||= self.rating

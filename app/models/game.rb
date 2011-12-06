@@ -19,6 +19,10 @@ class Game < ActiveRecord::Base
     #TODO validate scores for overtime games
   end
   
+  def name
+    "Game #{id}"
+  end
+  
   # Initialize for a doubles match
   def build_for_doubles
     u_ids = league.users.first(4)

@@ -1,5 +1,7 @@
-%h1= resource.name
-      
+.row
+  .span12
+    %h1= resource.name
+        
 - if resource == current_user
   .section
     = link_to 'Edit profile', edit_resource_path

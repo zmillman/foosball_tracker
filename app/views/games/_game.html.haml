@@ -1,17 +1,32 @@
-
-.row.game
-  .span8.title= link_to (l game.created_at, :format => :short), [game.league, game]
-  - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
-    .span4.team
-      - if team.is_winner?  
-        .score
+.row
+  .span2
+    %h4= link_to game.name, [game.league, game]
+  .span5.right
+    %em #{l game.created_at, :format => :short}
+  .span5
+    - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
+      .score
+        - if team.is_winner?
           %strong= team.goals
-        %p
-          %strong= team.players.collect{|p| p.user.name}.join(' & ')
-          
-      - else  
-        .score
+        - else
           = team.goals
-        %p
-          = team.players.collect{|p| p.user.name}.join(' & ')
-          
+      %ul.team      
+        - team.players.each do |player|
+          %li
+            - if team.is_winner?
+              %strong #{player.user.name}
+            - else
+              #{player.user.name}
+  .span2.right
+    - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
+      %ul
+        - team.players.each do |player|
+          %li
+            - if team.is_winner?
+              %strong (#{'%+0.2f' % player.rank_delta})
+            - else
+              (#{'%+0.2f' % player.rank_delta})
+              
+            
+.spacer3
+      

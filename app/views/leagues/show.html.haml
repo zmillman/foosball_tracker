@@ -1,49 +1,35 @@
 - provide :title, resource.name
-    
-%h1
-  #{resource.name}
 
-%p
-  %em
-    - unless resource.description.blank?
-      = resource.description
-    
-    (started by #{link_to resource.owner.name, resource.owner})
-    - if resource.authorized?(:edit, current_user)
-      = link_to 'Edit', edit_resource_path
-            
-- if current_user && !current_user.league_ids.include?(resource.id)
-  .section
-    = link_to 'Join this league', league_league_memberships_path(resource, :league_membership => {:user_id => current_user.id}), :method => :post, :class => 'btn submit'
-    = link_to 'Return to league listing', collection_path, :class => 'btn'
+%h1= resource.name
 
+.row
+  .span16
+    %p
+      %em
+        = resource.description
+        - if resource.authorized?(:edit, current_user)
+          = link_to 'Edit', edit_resource_path
 .row  
-  .span4
-    %h2 Players
-    - resource.users.sort_by(&:current_rank).reverse.each do |user|
-      .row
-        .span1
-          = link_to image_tag(user.gravatar_url(:size => 32)), user
-          
-        .span3
-          %strong #{user.name} (#{'%0.1f' % user.current_rank})
-          %br
-          %small #{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'}
 
-    %p= link_to 'Recalculate rankings', recalculate_ranks_league_path(resource), :method => :post, :class => 'btn'
-      
-  .span12
-    %h2 Games #{link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)}
-    .span8
-      - if resource.games.empty?
-        %p
-          %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
-        %p
-          %em You should #{link_to 'add one', [:new, resource, :game]}.
-      - else
-        - games_collection = resource.games.order('games.created_at DESC').page(params[:page] || 1)
-        = render :partial => 'games/game', :collection => games_collection
-        = paginate games_collection
+  .span4= render :partial => 'rankings', :object => resource
 
-         
-  
+  .span8
+    %h2 Games
+    - if resource.games.empty?
+      %p
+        %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
+      %p
+        %em You should #{link_to 'add one', [:new, resource, :game]}.
+    - else
+      - games_collection = resource.games.order('games.created_at DESC').page(params[:page] || 1)
+      = render :partial => 'games/game', :collection => games_collection
+      = paginate games_collection
+
+
+    - if current_user && !current_user.league_ids.include?(resource.id)
+      .section
+        = link_to 'Join this league', league_league_memberships_path(resource, :league_membership => {:user_id => current_user.id}), :method => :post, :class => 'btn submit'
+        = link_to 'Return to league listing', collection_path, :class => 'btn'
+        
+  .span4.right
+    = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
