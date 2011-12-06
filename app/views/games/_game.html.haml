@@ -1,20 +1,21 @@
 .row
-  .span4
-    %h4= link_to game.name, [game.league, game]
-  .span4
-    %em #{l game.created_at, :format => :short}
+  .span8
+    %h4= link_to "#{l game.created_at, :format => :short}", [game.league, game]
   - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
     .span4
-      %ul.team      
-        - team.players.each do |player|
-          %li
-            %strong #{player.user.name}
-            (#{'%+0.2f' % player.rank_delta})
       .score
         - if team.is_winner?
           %strong= team.goals
         - else
           = team.goals
+      %ul.team      
+        - team.players.each do |player|
+          %li
+            - if team.is_winner?
+              %strong #{player.user.name}
+            - else
+              = player.user.name
+            -# (#{'%+0.2f' % player.rank_delta})
               
             
 .spacer3
