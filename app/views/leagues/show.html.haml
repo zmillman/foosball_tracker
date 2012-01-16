@@ -32,4 +32,4 @@
         = link_to 'Return to league listing', collection_path, :class => 'btn'
         
   .span4.right
-    = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit' if resource.authorized?(:new_game, current_user)
+    = link_to 'Record a game', [:new, resource, :game], :class => 'btn submit'
