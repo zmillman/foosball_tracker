@@ -8,6 +8,7 @@ en:
   time:
     formats:
       short: "%b %d"
+      default: "%I:%M%p %B %d, %Y "
   flash:
     games:
       create: "Game was succesfully recorded."

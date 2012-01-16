@@ -1,4 +1,8 @@
+- provide :title, resource.name
+
 %h1= resource.name
+
+%p #{l resource.created_at}
   
 .row
   - resource.teams.each do |team|

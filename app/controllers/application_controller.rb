@@ -1,5 +1,10 @@
+require 'browser_timezone'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  
+  include BrowserTimezone
+  before_filter :set_timezone
   
   protected
   
