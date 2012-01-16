@@ -1,11 +1,12 @@
-.header_bar
-  .wordmark= link_to 'Foosball Tracker.', (current_user ? dashboard_path : root_path)
-  %ul.links
-    - if current_user
-      %li= link_to 'Leagues', leagues_path
-      %li= link_to 'Profile', user_path(current_user)
-      %li= link_to 'Log out', logout_path
-    - else
-      %li= link_to 'Sign up', sign_up_path
-      %li= link_to 'Sign in', login_path
+#header
+  .header_bar
+    .wordmark= link_to 'Foosball Tracker', (current_user ? dashboard_path : root_path)
+    %ul.links
+      - if current_user
+        %li= link_to 'Leagues', leagues_path
+        %li= link_to 'Profile', user_path(current_user)
+        %li= link_to 'Sign out', logout_path
+      - else
+        %li= link_to 'Sign up', sign_up_path
+        %li= link_to 'Sign in', login_path
        

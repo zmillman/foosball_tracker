@@ -4,31 +4,42 @@ $columns_gutter_width: 2 * $grid
 $content_width: $columns_width * $columns_count + $columns_gutter_width * ($columns_count - 1) 
 body
   //background: #ddd
-
+#header
+  width: 100%
+  margin: 0 0 $ygrid 0
+  clear: both
+  background: #333333 image_url("carbon_fibre_v2.png") center 0
+  border-bottom: 1px solid #999
+  
 .header_bar
   width: $content_width
   height: 4 * $ygrid
-  padding: $ygrid 1.5 * $grid
-  margin: 0 auto $ygrid auto
+  padding: 2 * $ygrid 1.5 * $grid
   clear: both
-  background: #f4f4f4
+  margin: 0 auto
+  letter-spacing: 0.5px
+  word-spacing: -1.0px
   @include rounded(bottom, 2px)
+  text-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px
   .wordmark
+    word-spacing: 0
     float: left
-    font-size: 18px
+    font-size: 20px
+    line-height: 24px
+    font-weight: normal
     height: 4 * $ygrid
-  .links
+  ul.links
     padding: 0.5 * $ygrid 0
     height: 3 * $ygrid
     float: right
-  ul
+    font-weight: bold
     list-style: none
     float: right
     li
       float: left
-      padding-left: $grid
+      padding-left: 2 *  $grid
   a
-    color: inherit
+    color: #ccc
     
         
 #body_wrapper
