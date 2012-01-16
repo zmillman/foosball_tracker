@@ -60,6 +60,8 @@ class Game < ActiveRecord::Base
     team_ratings = teams.sort_by(&:goals).reverse.collect{|team| team.players.collect(&:rating_for_calculation)}
     team_ranks = teams.sort_by(&:goals).reverse.collect{|team| team.is_winner ? 1 : 2}
     
+    self.goals_count = teams.collect(&:goals).inject(&:+)
+    
     logger.debug("Ratings:\n" + team_ratings.inspect)
     logger.debug("Rankings:\n" + team_ranks.inspect)
     
@@ -72,6 +74,10 @@ class Game < ActiveRecord::Base
         player.rating = player.rating_for_calculation
       end
     end
+  end
+  
+  def refresh_goal_cache
+    update_attribute :goals_count, teams.sum(:goals)
   end
   
   def self.recalculate

@@ -1,0 +1,9 @@
+- provide :title, "Hall of Fame #{resource.name}"
+
+%h1 Hall of Fame
+
+.row
+  .span8
+    %h2 Longest Games
+
+    = render resource.games.order('games.goals_count desc').first(5)

@@ -13,6 +13,7 @@ FoosballLeague::Application.routes.draw do
   
   resources :leagues do
     member do
+      get :hall_of_fame
       post :recalculate_ranks
     end
     

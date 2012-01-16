@@ -9,6 +9,10 @@ class LeaguesController < InheritedResources::Base
     create!
   end
   
+  def hall_of_fame
+    
+  end
+  
   def recalculate_ranks
     @league = League.find(params[:id])
     @league.games.recalculate

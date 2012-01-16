@@ -11,7 +11,9 @@
           = link_to 'Edit', edit_resource_path
 .row  
 
-  .span4= render :partial => 'rankings', :object => resource
+  .span4
+    = render :partial => 'rankings', :object => resource
+    %p= link_to 'Hall of Fame', [:hall_of_fame, resource]
 
   .span8
     %h2 Games
