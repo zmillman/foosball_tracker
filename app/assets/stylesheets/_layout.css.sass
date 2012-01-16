@@ -6,40 +6,42 @@ body
   //background: #ddd
 #header
   width: 100%
-  margin: 0 0 $ygrid 0
+  margin: 0 0 4 * $ygrid 0
   clear: both
-  background: #333333 image_url("carbon_fibre_v2.png") center 0
-  border-bottom: 1px solid #999
+  background: #f2f2f2
+  height: 4.5 * $ygrid
+  overflow: visible
   
 .header_bar
   width: $content_width
   height: 4 * $ygrid
-  padding: 2 * $ygrid 1.5 * $grid
+  padding: 1.5*$ygrid (3 * $ygrid) (2 * $ygrid) (3 * $ygrid)
   clear: both
-  margin: 0 auto
+  margin: 0 auto (-3 * $ygrid) auto
   letter-spacing: 0.5px
   word-spacing: -1.0px
-  @include rounded(bottom, 2px)
+  @include rounded(bottom, 5px)
   text-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px
+  background: #333333 image_url("carbon_fibre_v2.png") center 0
+  border-bottom: 1px solid #999
+  line-height: 24px
   .wordmark
     word-spacing: 0
     float: left
     font-size: 20px
-    line-height: 24px
     font-weight: normal
     height: 4 * $ygrid
   ul.links
     padding: 0.5 * $ygrid 0
     height: 3 * $ygrid
     float: right
-    font-weight: bold
     list-style: none
     float: right
     li
       float: left
       padding-left: 2 *  $grid
   a
-    color: #ccc
+    color: #ddd
     
         
 #body_wrapper
