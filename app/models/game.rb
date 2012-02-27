@@ -103,7 +103,7 @@ class Game < ActiveRecord::Base
     unless rating_pending?
       following_rated_games = Game.rating_current.after(self)
       if following_rated_games.exists?
-        puts "invalidating #{following_games.count} games: #{following_games.collect(&:id)}"
+        logger.info "Resetting the rating for #{following_rated_games.count} games"
         following_rated_games.reset_ratings!
         Game.rate_pending_games!
       end
