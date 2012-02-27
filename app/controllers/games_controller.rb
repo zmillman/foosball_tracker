@@ -1,10 +1,9 @@
 class GamesController < ApplicationController
   before_filter :login_required
+  before_filter :authorize_for_delete, :only => :delete
   
   has_scope :page, :default => 1
-  
-  caches_action :show, :layout => false
-  cache_sweeper :game_sweeper
+  has_scope :most_recent, :type => :boolean, :default => true
   
   inherit_resources
   
@@ -15,10 +14,20 @@ class GamesController < ApplicationController
   end
   
   def recalculate_ranks
-    Game.recalculate_ratings!
+    Game.reset_ratings!
+    Game.rate_pending_games!
     
     flash.notice = 'Rankings recalculated'
     
     redirect_to collection_path
+  end
+  
+  protected
+  
+  def authorize_for_delete
+    unless resource.users.include?(current_user)
+      flash.notice = 'You must have played in a game to be allowed to delete it'
+      redirect_to resource_path
+    end
   end
 end

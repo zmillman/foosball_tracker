@@ -1,21 +1,22 @@
 - provide :title, 'All Games'
 
-%h1 EasyMagoosh
-
-.row
-  .span16
-    %p "We'll take winners." <em>- Oscar Wilde</em>
+.spacer2
 
 .row  
 
   .span4
     = render :partial => 'users/rankings'
-    %p= link_to 'Hall of Fame', hall_of_fame_games_path
+    -# %p= link_to 'Hall of Fame', hall_of_fame_games_path
+    -# %p
+    -#   "We'll take winners."
+    -#   %br
+    -#   .pull-right
+    -#     <em>- Oscar Wilde</em>
 
   .span8
     %h2 Games
     - if collection.exists?
-      = render collection
+      = render collection.includes(:teams => {:players => [:user]})
       = paginate collection
 
     - else

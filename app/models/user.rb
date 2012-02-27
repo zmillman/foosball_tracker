@@ -66,4 +66,11 @@ class User < ActiveRecord::Base
       Player.default_rating
     end
   end
+  def rating_before_game(game)
+    rating_before(game.created_at || Time.now)
+  end
+  
+  def self.order_by_ranking
+    scoped.sort_by(&:rating)
+  end
 end

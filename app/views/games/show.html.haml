@@ -12,9 +12,19 @@
         %h3= player.position
         .row= render :partial => 'users/user', :object => player.user
         .span2
-          %p= '%+0.2f' % player.rank_delta
+          - if resource.rating_pending?
+            %p
+              %em rating pending
+          - else
+            %p
+              = '%0.2f' % Player.rank(player.rating)
+              %br
+              (#{'%+0.2f' % player.rank_delta})
         
 .section.actions
   = link_to 'Return to list', collection_path, :class => 'btn submit'
   = link_to 'Edit game results', edit_resource_path, :class => 'btn'
+  - if resource.users.include?(current_user)
+    .pull-right
+      = link_to 'Delete game', resource_path, :method => :delete, :confirm => 'Are you sure you want to delete this game?', :class => 'btn'
         

@@ -5,8 +5,6 @@ class UsersController < ApplicationController
   inherit_resources
   actions :show, :new, :create, :edit, :update
   
-  cache_sweeper :user_sweeper
-  
   def create
     create! do |success, failure|
       success.all do

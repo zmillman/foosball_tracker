@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227033720) do
+ActiveRecord::Schema.define(:version => 20120227050359) do
 
   create_table "games", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "goals_count", :default => 0
+    t.integer  "goals_count",    :default => 0
+    t.boolean  "rating_pending", :default => true
   end
 
   add_index "games", ["goals_count"], :name => "index_games_on_goals_count"
