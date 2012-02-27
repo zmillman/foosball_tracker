@@ -12,8 +12,8 @@ class GameSweeper < ActionController::Caching::Sweeper
   private
 
     def expire_cache(game)
-      expire_action(:controller => :leagues, :action => :show, :id => game.league_id)
-      expire_action(:controller => :games, :action => :show, :id => game.id, :league_id => game.league_id)
+      expire_action(:controller => :games, :action => :index)
+      expire_action(:controller => :games, :action => :show, :id => game.id)
     end
 
 end

@@ -4,7 +4,6 @@ class Game < ActiveRecord::Base
   include Saulabs:: TrueSkill
   
   has_many :teams, :dependent => :destroy
-  belongs_to :league
   
   accepts_nested_attributes_for :teams
   
@@ -25,7 +24,7 @@ class Game < ActiveRecord::Base
   
   # Initialize for a doubles match
   def build_for_doubles
-    u_ids = league.users.first(4)
+    u_ids = User.first(4)
     teams.build(:goals => 10 )
     teams.build(:goals => 0)
     teams.each do |s|
@@ -36,7 +35,7 @@ class Game < ActiveRecord::Base
   
   # Initialize for a singles match
   def build_for_singles
-    u_ids = league.users.first(2)
+    u_ids = users.first(2)
     2.times{teams.build}
     teams.each do |s|
       s.players.build({:position => 'Offense'})
@@ -80,7 +79,7 @@ class Game < ActiveRecord::Base
     update_attribute :goals_count, teams.sum(:goals)
   end
   
-  def self.recalculate
+  def self.recalculate_ratings!
     scoped.find_each do |game|
       game.mark_winner
       game.save!

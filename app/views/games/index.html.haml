@@ -1,10 +1,28 @@
-%h1 Listing games
+- provide :title, 'All Games'
 
-.section
-  %table
-    %thead
-      
-    %tbody= render :partial => 'row', :collection => collection
-  
-.section
-  = link_to 'New Game', new_resource_path
+%h1 EasyMagoosh
+
+.row
+  .span16
+    %p "We'll take winners." <em>- Oscar Wilde</em>
+
+.row  
+
+  .span4
+    = render :partial => 'users/rankings'
+    %p= link_to 'Hall of Fame', hall_of_fame_games_path
+
+  .span8
+    %h2 Games
+    - if collection.exists?
+      = render collection
+      = paginate collection
+
+    - else
+      %p
+        %em Looks like this league doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
+      %p
+        %em You should #{link_to 'add one', new_resource_path}.
+              
+  .span4.right
+    = link_to 'Record a game', new_resource_path, :class => 'btn submit'

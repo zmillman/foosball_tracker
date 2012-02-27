@@ -18,13 +18,6 @@
         %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation \
     %p
       %small Hover over points on the graph for specific game ratings
-      
-  .span8
-    %h3 Leagues
-    - if resource.leagues.empty?
-      %em #{resource.name} isn't in any leagues yet
-    - else
-      =raw resource.leagues.collect{|league| link_to league.name, league}.join(', ')
     
 .row
   .span16

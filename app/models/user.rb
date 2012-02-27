@@ -14,10 +14,6 @@ class User < ActiveRecord::Base
   has_many :teams, :through => :players
   has_many :games, :through => :teams
   
-  has_many :league_memberships
-  has_many :leagues, :through => :league_memberships
-  has_many :owned_leagues, :class_name => 'League', :foreign_key => :owner_id 
-  
   validates_confirmation_of :password  
   validates_presence_of :password, :on => :create
   validates_length_of :password, :on => :create, :minimum => 6

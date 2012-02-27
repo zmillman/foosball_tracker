@@ -55,6 +55,7 @@ end
 
 # Miscellaneous
 gem 'inherited_resources'
+gem 'has_scope'
 gem 'gravtastic'
 gem 'trueskill'
 gem 'kaminari'

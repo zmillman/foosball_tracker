@@ -1,6 +1,5 @@
-- league = rankings
 %h2 Players
-- league.users.sort_by(&:current_rank).reverse.each do |user|
+- User.all.sort_by(&:current_rank).reverse.each do |user|
   .row
     .span1
       = link_to image_tag(user.gravatar_url(:size => 32)), user
@@ -10,4 +9,4 @@
       %br
       %small #{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'}
 
-%p= link_to 'Recalculate rankings', recalculate_ranks_league_path(league), :method => :post, :class => 'btn'
+%p= link_to 'Recalculate rankings', recalculate_ranks_games_path, :method => :post, :class => 'btn'

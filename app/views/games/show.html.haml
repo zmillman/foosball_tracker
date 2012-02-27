@@ -15,6 +15,6 @@
           %p= '%+0.2f' % player.rank_delta
         
 .section.actions
-  = link_to 'Return to league', resource.league, :class => 'btn submit'
+  = link_to 'Return to list', collection_path, :class => 'btn submit'
   = link_to 'Edit game results', edit_resource_path, :class => 'btn'
         
