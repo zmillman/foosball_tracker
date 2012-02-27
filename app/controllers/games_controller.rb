@@ -13,15 +13,6 @@ class GamesController < ApplicationController
     end
   end
   
-  def recalculate_ranks
-    Game.reset_ratings!
-    Game.rate_pending_games!
-    
-    flash.notice = 'Rankings recalculated'
-    
-    redirect_to collection_path
-  end
-  
   protected
   
   def authorize_for_delete

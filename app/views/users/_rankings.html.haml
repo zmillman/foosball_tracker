@@ -8,5 +8,3 @@
       %strong #{user.name} (#{'%0.1f' % user.current_rank})
       %br
       %small #{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'}
-
-%p= link_to 'Recalculate rankings', recalculate_ranks_games_path, :method => :post, :class => 'btn'
