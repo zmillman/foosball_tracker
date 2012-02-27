@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     if current_user
-      redirect_to dashboard_path
+      redirect_to games_path
     end
   end
 end

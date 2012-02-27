@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     create! do |success, failure|
       success.all do
         self.current_user = resource
-        redirect_to dashboard_path
+        redirect_to games_path
       end
     end
   end
