@@ -52,7 +52,7 @@ class Game < ActiveRecord::Base
     winning_team.is_winner = true unless winning_team.nil?
     self.goals_count = teams.collect(&:goals).inject(&:+)
 
-    unless Game.before(self).with_rating_pending.exists?
+    if rating_pending? && !Game.before(self).with_rating_pending.exists?
       set_ratings
     end
     return true
@@ -86,8 +86,9 @@ class Game < ActiveRecord::Base
 
   def self.rate_pending_games!
     with_rating_pending.order('created_at ASC').all.each do |game|
-      puts "Rating Game ##{game.id}"
+      logger.info "Rating Game ##{game.id}"
       game.set_ratings
+      raise 'Rating failed!' if game.rating_pending
       game.save!
     end
   end
@@ -100,10 +101,10 @@ class Game < ActiveRecord::Base
 
   def invalidate_following_games
     unless rating_pending?
-      following_games = Game.rating_current.after(self)
-      if following_games.exists?
+      following_rated_games = Game.rating_current.after(self)
+      if following_rated_games.exists?
         puts "invalidating #{following_games.count} games: #{following_games.collect(&:id)}"
-        following_games.reset_ratings!
+        following_rated_games.reset_ratings!
         Game.rate_pending_games!
       end
     end
