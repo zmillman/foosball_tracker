@@ -8,7 +8,7 @@
         
 :coffeescript
   $ ->
-    data = #{@players.flot_series(:users => User.all).to_json}
+    data = #{@players.flot_series.to_json}
     myFlot = $.plot $('#fig'), data,
       series:
         lines:

@@ -41,7 +41,7 @@ class Player < ActiveRecord::Base
   end
   
   def self.flot_series(options = {})
-    (options[:users] || User.all).collect do |user|
+    (options[:users] || User).order_by_ranking.reverse.collect do |user|
       {
         :label => user.name,
         :data => scoped.where(:user_id => user.id).order('players.created_at ASC').collect{|p| [p.created_at.to_i * 1000, p.rank.to_f, p.skill_mean.to_f]}

@@ -71,6 +71,6 @@ class User < ActiveRecord::Base
   end
   
   def self.order_by_ranking
-    scoped.sort_by(&:rating)
+    scoped.sort_by(&:current_rank)
   end
 end
