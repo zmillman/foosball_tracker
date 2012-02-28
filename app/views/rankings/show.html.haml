@@ -1,6 +1,6 @@
 - provide :title, ''
 
-%h1 Ratings for the last #{pluralize @games.count, 'game'}
+%h1 Ratings for the last 30 days
 
 .row
   .span16
@@ -8,7 +8,7 @@
         
 :coffeescript
   $ ->
-    data = #{Player.joins(:game).merge(@games).flot_series.to_json}
+    data = #{@players.flot_series.to_json}
     myFlot = $.plot $('#fig'), data,
       series:
         lines:
@@ -19,11 +19,8 @@
       legend:
         position: 'nw'
       xaxis:
-        tickDecimals: 0
-        tickFormatter: (val, axis) ->
-          "Game " + val
-        # mode: 'time'
-        # timeformat: '%b %d'
+        mode: 'time'
+        timeformat: '%b %d'
       grid:
         hoverable: true
         mouseActiveRadius: 25
