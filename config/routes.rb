@@ -17,6 +17,7 @@ FoosballLeague::Application.routes.draw do
     end
   end
   resources :league_memberships
+  resource :rankings
 
   root :to => "pages#home"
 

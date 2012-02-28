@@ -27,6 +27,10 @@ class Player < ActiveRecord::Base
     Rating.new((skill_mean || 0), (skill_deviation || 0))
   end
   
+  def rank
+    [(skill_mean - 3 * skill_deviation), 0].max
+  end
+  
   def rank_delta
     Player.rank(self.rating) - Player.rank(user.rating_before(self.created_at))
   end
@@ -34,6 +38,15 @@ class Player < ActiveRecord::Base
   #temporary copy of rating for Game to use in its rating calculations
   def rating_for_calculation
     @rating_for_calculation ||= self.rating
+  end
+  
+  def self.flot_series(options = {})
+    (options[:users] || User.all).collect do |user|
+      {
+        :label => user.name,
+        :data => scoped.where(:user_id => user.id).order('players.created_at ASC').collect{|p| [p.created_at.to_i * 1000, p.rank.to_f, p.skill_mean.to_f]}
+      }
+    end
   end
   
   def self.default_rating
