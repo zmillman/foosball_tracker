@@ -2,6 +2,6 @@ class RankingsController < ApplicationController
   before_filter :login_required
   
   def show
-    @players = Player.where(['players.created_at > ?', 30.days.ago])
+    @games = Game.limit(100).order('games.created_at DESC')
   end
 end
