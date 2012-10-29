@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :players
   has_many :teams, :through => :players
   has_many :games, :through => :teams
+  has_many :league_memberships, :dependent => :destroy
+  has_many :leagues, :through => :league_memberships
   
   validates_confirmation_of :password  
   validates_presence_of :password, :on => :create

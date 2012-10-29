@@ -13,9 +13,7 @@
         %p This office has #{pluralize league.users.count, 'player'} and #{pluralize league.games.count, 'recorded game'}.
         %p
           = link_to 'View Office', league_path(league), :class => 'btn submit'
-          - if league.users.exists?(:id => current_user.id)
-            = link_to "Leave #{league.name}", leave_league_path(league), :class => 'btn', :method => :post
-          - else
+          - unless league.users.exists?(:id => current_user.id)
             = link_to "Join #{league.name}", join_league_path(league), :class => 'btn', :method => :post
 
       .span8
