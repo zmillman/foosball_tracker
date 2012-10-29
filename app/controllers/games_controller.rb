@@ -7,6 +7,8 @@ class GamesController < ApplicationController
   
   inherit_resources
   
+  belongs_to :league
+  
   def new
     new! do
       resource.build_for_doubles

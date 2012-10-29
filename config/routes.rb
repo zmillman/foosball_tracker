@@ -11,12 +11,20 @@ FoosballLeague::Application.routes.draw do
 
   resources :users, :only => [:show, :new, :create, :edit, :update]
 
-  resources :games do
-    collection do
-      get :hall_of_fame
+  get 'games' => redirect('/offices') # redirect for old bookmarks
+  resources :leagues, :only => [:index, :show, :new, :create], :path => 'offices' do
+    resources :games do
+      collection do
+        get :hall_of_fame
+      end
+    end
+    
+    member do
+      post :join
+      post :leave
     end
   end
-  resources :league_memberships
+  resources :league_memberships, :only => [:create, :destroy]
   resource :rankings
 
   root :to => "pages#home"

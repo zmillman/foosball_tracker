@@ -1,9 +1,10 @@
 #header
   .header_bar
-    .wordmark= link_to 'Foosball Tracker', (current_user ? games_path : root_path)
+    .wordmark= link_to 'Foosball Tracker', (current_user ? leagues_path : root_path)
     %ul.links
       - if current_user
-        %li= link_to 'Games', games_path
+        %li= link_to 'Offices', leagues_path
+        -# %li= link_to 'Games', games_path
         %li= link_to 'Profile', user_path(current_user)
         %li= link_to 'Sign out', logout_path
       - else

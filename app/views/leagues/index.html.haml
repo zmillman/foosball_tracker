@@ -1,0 +1,36 @@
+- provide :title, 'Offices'
+
+%h1= yield :title
+
+- if collection.exists?
+  %p These are all the offices recording games in Foosball Tracker.
+  
+  - collection.order('games_count DESC').includes(:users).each do |league|
+    %h2= league.name
+    
+    .row
+      .span8
+        %p This office has #{pluralize league.users.count, 'player'} and #{pluralize league.games.count, 'recorded game'}.
+        %p
+          = link_to 'View Office', league_path(league), :class => 'btn submit'
+          - if league.users.exists?(:id => current_user.id)
+            = link_to "Leave #{league.name}", leave_league_path(league), :class => 'btn', :method => :post
+          - else
+            = link_to "Join #{league.name}", join_league_path(league), :class => 'btn', :method => :post
+
+      .span8
+        - if league.users.exists?
+          %p
+            - league.users.each do |user|
+              = link_to user_path(user) do
+                = image_tag(user.gravatar_url(:size => 32))
+        - else
+          %p
+            %em There's no one playing foosball at #{league.name}
+    
+- else
+  %p Nobody has created an office yet. Why don't you make one? #{link_to 'Add an Office', new_league_path, :class => 'btn primary'}
+
+.section
+  .actions
+    %p= link_to 'Add an Office', new_league_path, :class => 'btn submit'

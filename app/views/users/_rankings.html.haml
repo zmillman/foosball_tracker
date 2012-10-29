@@ -1,5 +1,5 @@
-%h2 Players
-- User.all.sort_by(&:current_rank).reverse.each do |user|
+- users = rankings
+- users.all.sort_by(&:current_rank).reverse.each do |user|
   .row
     .span1
       = link_to image_tag(user.gravatar_url(:size => 32)), user

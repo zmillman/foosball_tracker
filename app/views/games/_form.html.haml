@@ -1,5 +1,10 @@
-= form_for [resource], :html => {:class => 'stacked'} do |f|
+= form_for [resource.league, resource], :html => {:class => 'stacked'} do |f|
   = render :partial => 'shared/error_messages', :locals => {:target => resource} 
+  
+  .field
+    = f.label :league, 'Office'
+    = f.collection_select :league_id, League.order(:name).all, :id, :name, {}, :disabled => f.object.new_record?
+  
   .row
     = f.fields_for :teams do |team_form|
       .columns.span6
@@ -11,8 +16,11 @@
           .field
             = players_form.hidden_field :position
             = players_form.label :user_id, players_form.object.position
-            = players_form.collection_select :user_id, User.order(:name).all, :id, :name
+            = players_form.collection_select :user_id, resource.league.users.order(:name).all, :id, :name
         
   .section.actions
     = f.submit 'Save Game'
-    = link_to 'Cancel', resource, :class => 'btn'  
+    - if resource.persisted?
+      = link_to 'Cancel', resource_path, :class => 'btn'  
+    - else
+      = link_to 'Cancel', parent_path, :class => 'btn'

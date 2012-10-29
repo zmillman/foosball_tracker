@@ -1,6 +1,6 @@
 .row
   .span8
-    %h4= link_to "#{l game.created_at, :format => :short}", game
+    %h4= link_to "#{l game.created_at, :format => :short}", [game.league, game]
   - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
     .span4
       .score

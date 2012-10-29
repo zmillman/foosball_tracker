@@ -1,0 +1,10 @@
+= form_for [resource], :html => {:class => 'stacked'} do |f|
+  = render :partial => 'shared/error_messages', :locals => {:target => resource} 
+  
+  .field
+    = f.label :name
+    = f.text_field :name
+    
+  .section.actions
+    = f.submit 'Save Office'
+    = link_to 'Cancel', resource, :class => 'btn'

@@ -1,6 +1,8 @@
+- provide :title, resource.name
+
 .row
   .span16
-    %h1= resource.name
+    %h1= yield :title
         
 - if resource == current_user
   %p= link_to 'Edit profile', edit_resource_path
@@ -65,8 +67,8 @@
 .row
   .span8
     %h3= pluralize resource.wins_count, 'Win'
-    = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC')
+    = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}])
   .span8
     %h3= pluralize resource.losses_count, 'Loss'
-    = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC')
+    = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}])
       

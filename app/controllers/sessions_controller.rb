@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       self.current_user = user
-      redirect_to games_path
+      redirect_to leagues_path
     else
       flash.now.alert = "Invalid email or password"
       render "new"
