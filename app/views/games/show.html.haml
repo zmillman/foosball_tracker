@@ -19,7 +19,11 @@
             %p
               = '%0.2f' % Player.rank(player.rating)
               %br
-              (#{'%+0.2f' % player.rank_delta})
+              - if player.rank_delta.round(2).zero?
+                (+0.00)
+              - else
+                (#{'%+0.2f' % player.rank_delta})
+
         
 .section.actions
   = link_to 'Return to Office', league_path(resource.league), :class => 'btn submit'
