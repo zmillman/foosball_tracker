@@ -9,11 +9,11 @@
     = f.label :email
     = f.text_field :email
     
-  - if resource.new_record?
-    .field
-      = f.label :password
-      = f.password_field :password 
+  .field
+    = f.label :password
+    = f.password_field :password 
   
+  - if resource.new_record?
     .field
       = f.submit 'Create my account'
   - else
