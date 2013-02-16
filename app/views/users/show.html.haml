@@ -20,7 +20,16 @@
         %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation \
     %p
       %small Hover over points on the graph for specific game ratings
-    
+  .span8
+    .row.short
+      .span4
+        %h3= pluralize resource.wins_count, 'Win'
+      .span4
+        %h3= pluralize resource.losses_count, 'Loss'
+    .row
+      .span8
+        %p #{pluralize resource.players.where(:position => 'Offense').count, 'game'} on offense, #{pluralize resource.players.where(:position => 'Defense').count, 'game'} on defense
+
 .row
   .span16
     #fig{:style => 'height: 300px'}
@@ -61,14 +70,21 @@
         $('#skill_deviation').text($('#skill_deviation').data('default').toFixed(2))
         myFlot.unlockCrosshair()
 
-%p #{pluralize resource.players.where(:position => 'Offense').count, 'game'} on offense, #{pluralize resource.players.where(:position => 'Defense').count, 'game'} on defense
-          
-        
 .row
   .span8
     %h3= pluralize resource.wins_count, 'Win'
-    = render :partial => 'games/game', :collection => resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}])
+    - wins = resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1)
+    - if wins.exists?
+      = render :partial => 'games/game', :collection => wins
+    - else
+      %p
+        %small No victories yet
+      
   .span8
     %h3= pluralize resource.losses_count, 'Loss'
-    = render :partial => 'games/game', :collection => resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}])
-      
+    - losses = resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1)
+    - if losses.exists?
+      = render :partial => 'games/game', :collection => losses
+    - else
+      %p
+        %small No defeats yet

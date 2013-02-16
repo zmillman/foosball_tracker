@@ -26,7 +26,7 @@
 
         
 .section.actions
-  = link_to 'Return to Office', league_path(resource.league), :class => 'btn submit'
+  = link_to 'Return to Office', league_path(resource.league), :class => 'btn btn-primary'
   = link_to 'Edit Results', edit_resource_path, :class => 'btn'
   - if resource.users.include?(current_user)
     .pull-right

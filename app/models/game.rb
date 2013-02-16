@@ -8,6 +8,10 @@ class Game < ActiveRecord::Base
   has_many :teams, :dependent => :destroy
   has_many :players, :through => :teams
   has_many :users, :through => :players
+  
+  has_one :winning_team, :conditions => {:is_winner => true}, :class_name => 'Team'
+  has_one :losing_team, :conditions => {:is_winner => true}, :class_name => 'Team'
+  has_many :winners, :through => :winning_team, :source => :users, :class_name => 'User'
 
   accepts_nested_attributes_for :teams
 

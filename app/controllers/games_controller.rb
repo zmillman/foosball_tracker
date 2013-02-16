@@ -9,10 +9,16 @@ class GamesController < ApplicationController
   
   belongs_to :league
   
+  respond_to :html
+  
   def new
     new! do
       resource.build_for_doubles
     end
+  end
+  
+  def create
+    create! {params[:create_and_new] ? new_resource_path : resource_path}
   end
   
   protected
@@ -22,5 +28,11 @@ class GamesController < ApplicationController
       flash.notice = 'You must have played in a game to be allowed to delete it'
       redirect_to resource_path
     end
+  end
+  
+  private
+  
+  def interpolation_options
+    { :winners_names => resource.winners.collect(&:name).join(' and ') }
   end
 end

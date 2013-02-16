@@ -11,7 +11,8 @@ en:
       default: "%I:%M%p %B %d, %Y "
   flash:
     games:
-      create: "Game was succesfully recorded."
+      create:
+        notice: "Nice job, %{winners_names}! Your victory has been recorded for generations to come."
     users:
       create:
         notice: "Nice to meet you, %{user_name}. You're in the system now."

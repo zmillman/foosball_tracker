@@ -2,6 +2,7 @@ class Team < ActiveRecord::Base
   belongs_to :game
   
   has_many :players, :dependent => :destroy, :order => "position DESC"
+  has_many :users, :through => :players
   
   accepts_nested_attributes_for :players
   

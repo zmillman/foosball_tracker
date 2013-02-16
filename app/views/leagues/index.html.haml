@@ -12,7 +12,7 @@
       .span8
         %p This office has #{pluralize league.users.count, 'player'} and #{pluralize league.games.count, 'recorded game'}.
         %p
-          = link_to 'View Office', league_path(league), :class => 'btn submit'
+          = link_to 'View Office', league_path(league), :class => 'btn btn-primary'
           - unless league.users.exists?(:id => current_user.id)
             = link_to "Join #{league.name}", join_league_path(league), :class => 'btn', :method => :post
 
@@ -30,5 +30,7 @@
   %p Nobody has created an office yet. Why don't you make one? #{link_to 'Add an Office', new_league_path, :class => 'btn primary'}
 
 .section
-  .actions
-    %p= link_to 'Add an Office', new_league_path, :class => 'btn submit'
+  .row
+    .span16
+      .actions
+        %p= link_to 'Add an Office', new_league_path, :class => 'btn'

@@ -18,7 +18,7 @@
       - if resource.users.where(:id => current_user.id).exists?
         %p= link_to "Leave #{resource.name}", leave_league_path(resource), :class => 'btn', :method => :post
       - else
-        %p= link_to "Join #{resource.name}", join_league_path(resource), :class => 'btn submit', :method => :post
+        %p= link_to "Join #{resource.name}", join_league_path(resource), :class => 'btn btn-primary', :method => :post
       
   .span8
     %h2 Games
@@ -33,6 +33,6 @@
       %p
         %em You should #{link_to 'add one', new_league_game_path(resource)}.
   .span4.right
-    = link_to 'Record a Game', new_league_game_path(resource), :class => 'btn submit'
+    = link_to 'Record a Game', new_league_game_path(resource), :class => 'btn btn-primary'
 
     
