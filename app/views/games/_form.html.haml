@@ -22,7 +22,7 @@
     = f.submit 'Save Game', :class => 'btn-primary'    
     - if resource.new_record?
       = f.submit 'Save and Record Another Game', :name => 'create_and_new'
-      or #{link_to 'cancel', parent_path}
+      or #{link_to 'return to your office', parent_path}
     - else
-      or #{link_to 'cancel', resource_path}
+      or #{link_to 'cancel and return to game results', resource_path}
 
