@@ -2,11 +2,10 @@
 
 %h1= yield :title
 
-%p
-  This office has #{pluralize resource.users.count, 'player'} and #{pluralize resource.games.count, 'game'}.
+%p This office has #{pluralize resource.users.count, 'player'} and #{pluralize resource.games.count, 'game'}.
 
 .row
-  .span4
+  .span3
     %h2 Players
     - if resource.users.exists?
       = render :partial => 'users/rankings', :object => resource.users
@@ -19,8 +18,8 @@
         %p= link_to "Leave #{resource.name}", leave_league_path(resource), :class => 'btn', :method => :post
       - else
         %p= link_to "Join #{resource.name}", join_league_path(resource), :class => 'btn btn-primary', :method => :post
-      
-  .span8
+  
+  .span6
     %h2 Games
     - @games = resource.games.most_recent.page(params[:page])
     - if @games.exists?
@@ -31,8 +30,5 @@
       %p
         %em Looks like this office doesn't have any games recorded yet. Kinda defeats the purpose, doesn't it?
       %p
-        %em You should #{link_to 'add one', new_league_game_path(resource)}.
-  .span4.right
-    = link_to 'Record a Game', new_league_game_path(resource), :class => 'btn btn-primary'
-
-    
+        %em You should #{link_to 'record one', new_league_game_path(resource)}.
+  .span2= link_to 'Record a Game', new_league_game_path(resource), :class => 'btn btn-primary'

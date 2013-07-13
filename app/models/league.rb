@@ -5,4 +5,8 @@ class League < ActiveRecord::Base
   
   has_many :games
   
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+  
 end

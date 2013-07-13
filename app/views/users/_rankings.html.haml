@@ -1,10 +1,2 @@
 - users = rankings
-- users.all.sort_by(&:current_rank).reverse.each do |user|
-  .row
-    .span1
-      = link_to image_tag(user.gravatar_url(:size => 32)), user
-  
-    .span3
-      %strong #{user.name} (#{'%0.1f' % user.current_rank})
-      %br
-      %small #{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'}
+= render :partial => 'users/user', :collection => users.all.sort_by(&:current_rank).reverse

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028200930) do
+ActiveRecord::Schema.define(:version => 20130713055352) do
 
   create_table "games", :force => true do |t|
     t.timestamp "created_at"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(:version => 20121028200930) do
   add_index "games", ["league_id"], :name => "index_games_on_league_id"
 
   create_table "league_memberships", :force => true do |t|
-    t.integer  "league_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "league_id"
+    t.integer   "user_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "league_memberships", ["league_id"], :name => "index_league_memberships_on_league_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20121028200930) do
 
   create_table "leagues", :force => true do |t|
     t.string   "name"
-    t.string   "games_count"
+    t.integer  "games_count", :limit => 255, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

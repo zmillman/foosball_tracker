@@ -1,7 +1,7 @@
-
-.span1
-  = link_to image_tag(user.gravatar_url(:size => 32)), user
-.span3
-  %strong= user.name
-  %br
-  %small (#{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'})
+.media
+  = link_to(user_path(user), :class => 'pull-left') do
+    = image_tag user.gravatar_url(:size => 32), :class => 'media-object'
+  .media-body
+    %strong #{user.name} (#{'%0.1f' % user.current_rank})
+    %br
+    %small (#{pluralize user.wins_count, 'win'}, #{pluralize user.losses_count, 'loss'})

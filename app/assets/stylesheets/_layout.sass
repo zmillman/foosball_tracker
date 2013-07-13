@@ -1,7 +1,3 @@
-$columns_count: 16
-$columns_width: 3 * $grid
-$columns_gutter_width: 2 * $grid
-$content_width: $columns_width * $columns_count + $columns_gutter_width * ($columns_count - 1) 
 body
   //background: #ddd
 #header
@@ -13,14 +9,14 @@ body
   overflow: visible
   
 .header_bar
-  width: $content_width
+  width: $gridRowWidth
   height: 4 * $ygrid
   padding: 1.5*$ygrid (3 * $ygrid) (2 * $ygrid) (3 * $ygrid)
   clear: both
   margin: 0 auto (-3 * $ygrid) auto
   letter-spacing: 0.5px
   word-spacing: -1.0px
-  @include rounded(bottom, 5px)
+  @include border-bottom-radius(5px)
   text-shadow: rgba(0, 0, 0, 0.25) 1px 1px 1px
   background: #333333 image-url("carbon_fibre_v2.png") 0 0
   border-bottom: 1px solid #999
@@ -47,7 +43,7 @@ body
 #body_wrapper
   clear: both
   margin: 0 auto
-  width: $content_width
+  width: $gridRowWidth
   background: #fff
   overflow: hidden
   padding: $grid 2 * $grid
@@ -55,7 +51,7 @@ body
 .footer
   border-top: 1px dotted #ccc
   font-size: 80%
-  width: $content_width/2
+  width: $gridRowWidth/2
   color: #aaa
   margin: $ygrid auto
   padding-top: $grid / 2
@@ -71,29 +67,14 @@ body
 .spacer2
   height: 2 * $ygrid
    
-.row, .section
+.section
   float: left
   clear: both
   margin-bottom: $ygrid * 2
-  
-.row
-  margin-left: - $columns_gutter_width
-  
+    
 .row.short
   margin-bottom: 0
-      
-// Span classes
-@for $colspan from 1 through $columns_count
-  .span#{$colspan}
-    float: left 
-    margin-left: 2 * $grid
-    width: $colspan * $columns_width + ($colspan - 1) * $columns_gutter_width
-    
-// Offset classes
-@for $offset from 1 through ($columns_count - 1)
-  .offset#{$offset}
-    margin-left: $offset * ($columns_width + $columns_gutter_width)
-    
+          
 .right
   text-align: right
   input, .btn

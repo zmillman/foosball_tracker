@@ -1,14 +1,14 @@
 - provide :title, resource.name
 
 .row
-  .span16
+  .span12
     %h1= yield :title
         
 - if resource == current_user
   %p= link_to 'Edit profile', edit_resource_path
       
 .row    
-  .span8
+  .span6
     %h3
       Rating:
       %span#rating{:data => {:default => resource.current_rank}}= '%0.2f' % resource.current_rank
@@ -20,19 +20,20 @@
         %span#skill_deviation{:data => {:default => resource.current_rating.deviation}}= '%0.2f' % resource.current_rating.deviation \
     %p
       %small Hover over points on the graph for specific game ratings
-  .span8
+  .span6
     .row.short
-      .span4
+      .span3
         %h3= pluralize resource.wins_count, 'Win'
-      .span4
+      .span3
         %h3= pluralize resource.losses_count, 'Loss'
     .row
-      .span8
+      .span6
         %p #{pluralize resource.players.where(:position => 'Offense').count, 'game'} on offense, #{pluralize resource.players.where(:position => 'Defense').count, 'game'} on defense
 
 .row
-  .span16
-    #fig{:style => 'height: 300px'}
+  .span12
+    #fig{:style => 'height: 300px; width: 100%'}
+%br
 
 :coffeescript
   $ ->
@@ -71,20 +72,24 @@
         myFlot.unlockCrosshair()
 
 .row
-  .span8
+  .span6
     %h3= pluralize resource.wins_count, 'Win'
-    - wins = resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1)
+    - wins = resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1).per(10)
     - if wins.exists?
       = render :partial => 'games/game', :collection => wins
+      - if wins.num_pages > 1
+        %p <em>And #{resource.wins_count - wins.size} more...</em>
     - else
       %p
         %small No victories yet
       
-  .span8
+  .span6
     %h3= pluralize resource.losses_count, 'Loss'
-    - losses = resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1)
+    - losses = resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1).per(10)
     - if losses.exists?
       = render :partial => 'games/game', :collection => losses
+      - if losses.num_pages > 1
+        %p <em>And #{resource.losses_count - losses.size} more...</em>
     - else
       %p
         %small No defeats yet

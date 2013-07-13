@@ -3,7 +3,7 @@ require 'saulabs/trueskill'
 class Game < ActiveRecord::Base
   include Saulabs:: TrueSkill
 
-  belongs_to :league
+  belongs_to :league, :counter_cache => true
   
   has_many :teams, :dependent => :destroy
   has_many :players, :through => :teams

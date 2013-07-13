@@ -3,28 +3,29 @@
 %h1= yield :title
 
 - if collection.exists?
-  %p These are all the offices recording games in Foosball Tracker.
+  %p These are #{collection.count} offices recording games in Foosball Tracker
   
-  - collection.order('games_count DESC').includes(:users).each do |league|
-    %h2= league.name
-    
+  - collection.order('games_count DESC').includes(:users).each_slice(2) do |leagues|
     .row
-      .span8
-        %p This office has #{pluralize league.users.count, 'player'} and #{pluralize league.games.count, 'recorded game'}.
-        %p
-          = link_to 'View Office', league_path(league), :class => 'btn btn-primary'
-          - unless league.users.exists?(:id => current_user.id)
-            = link_to "Join #{league.name}", join_league_path(league), :class => 'btn', :method => :post
+      - leagues.each do |league|
+        .span6
+          %h2= link_to league.name, league_path(league)
+    
+          %p <strong>#{pluralize league.users.count, 'player'}</strong> have recorded #{pluralize league.games_count, 'game'}
 
-      .span8
-        - if league.users.exists?
+          - if league.users.exists?
+            %p
+              - league.users.each do |user|
+                = link_to user_path(user) do
+                  = image_tag(user.gravatar_url(:size => 32))
+          - else
+            %p
+              %em There's no one playing foosball at #{league.name}
           %p
-            - league.users.each do |user|
-              = link_to user_path(user) do
-                = image_tag(user.gravatar_url(:size => 32))
-        - else
-          %p
-            %em There's no one playing foosball at #{league.name}
+            = link_to 'View Office', league_path(league), :class => 'btn btn-primary'
+            - unless league.users.exists?(:id => current_user.id)
+              = link_to "Join Office", join_league_path(league), :class => 'btn', :method => :post
+    %br
     
 - else
   %p Nobody has created an office yet. Why don't you make one? #{link_to 'Add an Office', new_league_path, :class => 'btn primary'}

@@ -10,19 +10,21 @@
       %h2= team.goals
       - team.players.each do |player|
         %h3= player.position
-        .row= render :partial => 'users/user', :object => player.user
-        .span2
-          - if resource.rating_pending?
-            %p
-              %em rating pending
-          - else
-            %p
-              = '%0.2f' % Player.rank(player.rating)
-              %br
-              - if player.rank_delta.round(2).zero?
-                (+0.00)
-              - else
-                (#{'%+0.2f' % player.rank_delta})
+        .row
+          .span4
+            = render :partial => 'users/user', :object => player.user
+          .span2
+            - if resource.rating_pending?
+              %p
+                %em rating pending
+            - else
+              %p
+                = '%0.2f' % Player.rank(player.rating)
+                %br
+                - if player.rank_delta.round(2).zero?
+                  (+0.00)
+                - else
+                  (#{'%+0.2f' % player.rank_delta})
 
         
 .section.actions

@@ -1,8 +1,11 @@
 .row
-  .span8
-    %h4= link_to "#{l game.created_at, :format => :short}", [game.league, game]
+  .span6
+    %h4
+      = link_to game.name, league_game_path(game.league, game)
+      %small
+        &mdash; #{l game.created_at.to_date, :format => :long}
   - game.teams.sort_by{|t| t.is_winner? ? 0 : 1}.each do |team|
-    .span4
+    .span3
       .score
         - if team.is_winner?
           %strong= team.goals

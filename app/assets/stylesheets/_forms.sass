@@ -15,11 +15,11 @@ form
       border-color: $error_color
 
 
-input[type="text"], input[type="password"], select, textarea
+input[type="text"], input[type="email"], input[type="password"], select, textarea
   padding: $grid/2 - 1
   border: 1px solid #aaa
   width: 23 * $grid
-  @include rounded
+  @include border-radius(3px)
   &:focus
     background: #fffbe3
 textarea
@@ -32,22 +32,22 @@ input[type="submit"], .btn
   font-weight: 700
   cursor: pointer
   padding: 3 * $grid/4 $grid
-  @include rounded
+  @include border-radius(3px)
   color: #555
-  @include gradient($secondary_button_color, darken($secondary_button_color, 10%))
+  @include gradient-vertical($secondary_button_color, darken($secondary_button_color, 10%))
   border: 1px solid darken($secondary_button_color, 15%)
   text-shadow: #fff 1px 1px 1px
   &:hover, &:focus
-    @include gradient(lighten($secondary_button_color, 2%), darken($secondary_button_color, 5%)) 
+    @include gradient-vertical(lighten($secondary_button_color, 2%), darken($secondary_button_color, 5%)) 
   
   &.btn-primary
     border: 1px solid darken($primary_button_color, 15%)
     color: #222
     margin-right: $grid/2
-    @include gradient($primary_button_color, darken($primary_button_color, 10%))
+    @include gradient-vertical($primary_button_color, darken($primary_button_color, 10%))
     text-shadow: lighten($primary_button_color, 10%) 1px 1px 1px
     &:hover, &:focus
-      @include gradient(lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
+      @include gradient-vertical(lighten($primary_button_color, 2%), darken($primary_button_color, 5%))
    
 .btn
   height: 19px

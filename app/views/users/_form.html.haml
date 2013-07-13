@@ -2,12 +2,12 @@
   = render 'shared/error_messages', :target => resource   
   
   .field
-    = f.label :name
+    = f.label :name, 'Your Name'
     = f.text_field :name
    
   .field
-    = f.label :email
-    = f.text_field :email
+    = f.label :email, 'Email Address'
+    = f.text_field :email, :type => 'email'
     
   .field
     = f.label :password
@@ -15,7 +15,7 @@
   
   - if resource.new_record?
     .field
-      = f.submit 'Create my account'
+      = f.submit "Let's Play Foosball!", :class => 'btn-primary'
   - else
     .section.actions
       = f.submit 'Save'
