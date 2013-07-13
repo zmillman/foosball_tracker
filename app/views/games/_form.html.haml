@@ -19,10 +19,10 @@
             = players_form.collection_select :user_id, resource.league.users.order(:name).all, :id, :name
         
   .section.actions
-    = f.submit 'Save Game', :class => 'btn-primary'    
     - if resource.new_record?
-      = f.submit 'Save and Record Another Game', :name => 'create_and_new'
-      or #{link_to 'return to your office', parent_path}
+      = f.submit 'Record Game', :class => 'btn-primary'
+      or #{link_to 'cancel', parent_path}
     - else
-      or #{link_to 'cancel and return to game results', resource_path}
+      = f.submit 'Save Game', :class => 'btn-primary'
+      or #{link_to 'cancel', resource_path}
 

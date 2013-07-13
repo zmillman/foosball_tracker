@@ -27,8 +27,9 @@
         
 .section.actions
   = link_to 'Return to Office', league_path(resource.league), :class => 'btn btn-primary'
-  = link_to 'Edit Results', edit_resource_path, :class => 'btn'
+  = link_to 'Record Another Game', new_resource_path, :class => 'btn'
   - if resource.users.include?(current_user)
     .pull-right
+      = link_to 'Edit Results', edit_resource_path, :class => 'btn'
       = link_to 'Delete Game', resource_path, :method => :delete, :confirm => 'Are you sure you want to delete this game?', :class => 'btn'
         
