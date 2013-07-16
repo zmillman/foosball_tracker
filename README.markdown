@@ -17,4 +17,5 @@ heroku create --stack cedar
 git push heroku master
 heroku run rake db:migrate
 ```
-  
+
+[![Code Climate](https://codeclimate.com/github/zmillman/foosball_tracker.png)](https://codeclimate.com/github/zmillman/foosball_tracker)
