@@ -5,7 +5,7 @@
 - if collection.exists?
   %p These are #{collection.count} offices recording games in Foosball Tracker
   
-  - collection.order('games_count DESC').includes(:users).each_slice(2) do |leagues|
+  - collection.order('COALESCE(leagues.games_count, 0) DESC').includes(:users).each_slice(2) do |leagues|
     .row
       - leagues.each do |league|
         .span6
