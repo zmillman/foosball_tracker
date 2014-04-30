@@ -74,9 +74,9 @@
 .row
   .span6
     %h3= pluralize resource.wins_count, 'Win'
-    - wins = resource.wins.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1).per(10)
+    - wins = resource.wins.order('games.created_at DESC').page(1).per(10)
     - if wins.exists?
-      = render :partial => 'games/game', :collection => wins
+      = render :partial => 'games/game', :collection => wins.includes([:league, {:players => :user}])
       - if wins.num_pages > 1
         %p <em>And #{resource.wins_count - wins.size} more...</em>
     - else
@@ -85,9 +85,9 @@
       
   .span6
     %h3= pluralize resource.losses_count, 'Loss'
-    - losses = resource.losses.order('games.created_at DESC').includes([:league, {:players => :user}]).page(1).per(10)
+    - losses = resource.losses.order('games.created_at DESC').page(1).per(10)
     - if losses.exists?
-      = render :partial => 'games/game', :collection => losses
+      = render :partial => 'games/game', :collection => losses.includes([:league, {:players => :user}])
       - if losses.num_pages > 1
         %p <em>And #{resource.losses_count - losses.size} more...</em>
     - else
